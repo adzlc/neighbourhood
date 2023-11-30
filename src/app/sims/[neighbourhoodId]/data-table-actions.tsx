@@ -1,0 +1,117 @@
+import { type Row, type Table } from "@tanstack/react-table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "~/app/_components/ui/dropdown-menu";
+import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Button } from "~/app/_components/ui/button";
+import { MoreHorizontal } from "lucide-react";
+import { type Sim } from "@prisma/client";
+import { useState } from "react";
+import { Input } from "~/app/_components/ui/input";
+
+interface DataTableRowActionsProps<TData> {
+  row: Row<Sim>;
+  table: Table<TData>;
+}
+export function DataTableRowActions<TData>({
+  table,
+  row,
+}: DataTableRowActionsProps<TData>) {
+  const sim = row.original;
+  const [open, setOpen] = useState(false);
+  const [correctSimName, setCorrectSimName] = useState(false);
+  return (
+    <>
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <Button variant="ghost" className="h-8 w-8 p-0">
+            <span className="sr-only">Open menu</span>
+            <MoreHorizontal className="h-4 w-4" />
+          </Button>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent align="end">
+          <DropdownMenuItem
+            onClick={() => {
+              table.options.meta?.handleEditSim(sim.id);
+            }}
+          >
+            Edit
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
+            Delete
+          </DropdownMenuItem>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+              Delete {sim.firstName} {sim.lastName}
+            </DialogTitle>
+            <DialogDescription>
+              Deleting a Sim cannot be undone. To delete please enter
+              <b>
+                {" "}
+                {sim.firstName} {sim.lastName}{" "}
+              </b>{" "}
+              below.
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="sm:justify-start">
+            <div className="grid gap-4 py-4">
+              <div className="items-start">
+                <Input
+                  placeholder="Enter name of Sim"
+                  id="delete-sim-check"
+                  name="delete-sim-check"
+                  className="w-60"
+                  onChange={(e) => {
+                    const value = e.currentTarget.value;
+                    setCorrectSimName(
+                      value === `${sim.firstName} ${sim.lastName}`,
+                    );
+                  }}
+                />
+              </div>
+              <div className="grid grid-cols-2 items-center gap-5">
+                <Button
+                  id="deleteSimButton"
+                  type="submit"
+                  disabled={!correctSimName}
+                  onClick={() => {
+                    table.options.meta?.handleDeleteSim(sim.id);
+                    setOpen(false);
+                  }}
+                >
+                  Delete Sim
+                </Button>
+
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Cancel
+                  </Button>
+                </DialogClose>
+              </div>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
+  );
+}

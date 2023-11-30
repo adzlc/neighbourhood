@@ -1,0 +1,56 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Neighbourhood {
+    id          Int      @id @default(autoincrement())
+    name        String
+    description String?
+    sims        Sim[]
+    createdAt   DateTime @default(now())
+    updatedAt   DateTime @updatedAt
+}
+
+model Sim {
+    id        Int      @id @default(autoincrement())
+    firstName     String
+    lastName      String
+    gender        String
+    race          String
+    orientation   String?
+    lifestage     String
+    aspiration    String?
+    career        String?
+    zodiac        String
+    hobby         String?
+    pets          Pet[]
+    parents       Sim[] @relation("Children")
+    children      Sim[] @relation("Children")
+    eyeColour     String
+    hairColour    String
+    neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
+    neighbourhoodId Int
+
+
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+
+    @@index([lastName])
+}
+
+model Pet {
+    id        Int      @id @default(autoincrement())
+    name      String
+    gender    String
+    career    String?
+    owner     Sim?  @relation(fields: [ownerId], references: [id])
+    ownerId   Int
+}
