@@ -28,6 +28,12 @@ export function MainNav({ className, neighbourhood, ...props }: SidebarProps) {
             List Sims
           </Link>
           <Link
+            href={`/dashboard/${neighbourhood.id}`}
+            className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
+          >
+           Dashboards
+          </Link>
+          <Link
             href={`/sims/create/${neighbourhood.id}`}
             className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
           >

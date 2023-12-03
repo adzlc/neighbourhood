@@ -1,10 +1,7 @@
 import Link from "next/link";
 import { Suspense } from "react";
-
-import { createNeighbourhood, list } from "~/server/actions/neighbourhoods";
 import NeighbourhoodForm from "./_components/neighbourhood/neighbourhood-form";
-import { type Neighbourhood } from "@prisma/client";
-import { revalidatePath } from "next/cache";
+import { create, list } from "~/server/actions/neighbourhoods";
 
 export default async function Home() {
   const neighbourhoods = await list();
@@ -15,15 +12,15 @@ export default async function Home() {
           Neighbourhoods
         </h1>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-          <Suspense fallback={<p>Loading feed...</p>}>
+          <Suspense fallback={<p>Loading neighbourhoods...</p>}>
             {neighbourhoods?.map((neighbourhood) => (
               <Link
+              key={neighbourhood.id}
                 className="flex max-w-xs flex-col gap-4 rounded-xl bg-cyan-700 p-4 hover:bg-cyan-900"
                 href={`/sims/${neighbourhood.id}`}
               >
                 <h3 className="text-2xl font-bold text-white">{neighbourhood.name} →</h3>
-                <div className="text-lg text-white">
-                  Some description about the neighbourhood here.
+                <div className="text-lg text-white">{neighbourhood.description}
                 </div>
               </Link>
             ))
@@ -39,14 +36,7 @@ export default async function Home() {
 }
 
 async function CreateNeighbourhood() {
-  async function create(data: FormData) {
-    "use server";
-    const createData = {
-      name: data.get("name") as string,
-    };
-    const response = await createNeighbourhood(createData as Neighbourhood);
-    revalidatePath(`/sims/${response?.response.id}`);
-  }
+
   return (
     <div className="w-full max-w-xs">
       <NeighbourhoodForm submitAction={create} />

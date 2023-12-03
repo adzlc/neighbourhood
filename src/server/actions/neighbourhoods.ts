@@ -1,5 +1,6 @@
 "use server";
 import { type Neighbourhood } from "@prisma/client";
+import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
 
 export async function list() {
@@ -17,16 +18,39 @@ export async function get(id: number) {
   });
 }
 
+export async function create(data: FormData) {
+  "use server";
+  const createData = {
+    name: data.get("name") as string,
+    description: data.get("description") as string,
+  };
+  const response = await createNeighbourhood(createData as Neighbourhood);
+  if (response) {
+    revalidatePath(`/`);
+  }
+}
+
 export async function createNeighbourhood(neighbourhood: Neighbourhood) {
   try {
     console.log("Neighbourhood being created", neighbourhood);
     const response = await db.neighbourhood.create({
       data: neighbourhood,
     });
-    return { response };
+    return response;
   } catch (e) {
     console.log(e);
+    return null;
   }
+}
+
+
+export async function editNeighbourhood(data: FormData) {
+  const inputData = {
+    name: data.get("name"),
+    description: data.get("description"),
+  };
+  const neighbourhoodId = parseInt(data.get("id") as string, 10);
+  await updateNeighbourhood(neighbourhoodId, inputData as Neighbourhood);
 }
 
 export async function updateNeighbourhood(
@@ -40,6 +64,20 @@ export async function updateNeighbourhood(
         id: id,
       },
       data: neighbourhood,
+    });
+    return { response };
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+}
+
+export async function deleteNeighbourhood(id: number) {
+  try {
+    const response = await db.neighbourhood.delete({
+      where: {
+        id: id,
+      },
     });
     return { response };
   } catch (e) {

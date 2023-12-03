@@ -23,7 +23,6 @@ import {
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 import { Button } from "~/app/_components/ui/button";
-import { Input } from "~/app/_components/ui/input";
 import { type CSSProperties, useState } from "react";
 import { type Sim } from "@prisma/client";
 import { DataTableFilters } from "./data-table-filters";

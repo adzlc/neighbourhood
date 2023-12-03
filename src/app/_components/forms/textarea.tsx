@@ -12,7 +12,7 @@ const TextArea = ({
   id: string;
   name: string;
   label: string;
-  value: string;
+  value: string | undefined | null;
 }) => {
   const [formValue, setFormValue] = useState<string>(value ?? "");
   return (
