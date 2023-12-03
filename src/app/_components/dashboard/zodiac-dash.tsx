@@ -1,10 +1,10 @@
-import { getHairColourData } from "~/server/actions/dashboards";
+import { getZodiacData } from "~/server/actions/dashboards";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardHairColour = async ({ id }: { id: number }) => {
-  const data = await getHairColourData(id);
+const DashboardZodiac = async ({ id }: { id: number }) => {
+  const data = await getZodiacData(id);
 
   return (
     <>
@@ -13,4 +13,4 @@ const DashboardHairColour = async ({ id }: { id: number }) => {
   );
 };
 
-export default DashboardHairColour;
+export default DashboardZodiac;
