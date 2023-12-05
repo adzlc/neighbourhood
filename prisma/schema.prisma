@@ -15,6 +15,7 @@ model Neighbourhood {
     name        String
     description String?
     sims        Sim[]
+    pets        Pet[]
     createdAt   DateTime @default(now())
     updatedAt   DateTime @updatedAt
 }
@@ -28,12 +29,22 @@ model Sim {
     orientation   String?
     lifestage     String
     aspiration    String?
+    secondAspiration    String?
+    maritalStatus String?
     career        String?
-    zodiac        String
+    zodiac        String?
     hobby         String?
+    subHobby      String?
+    lifetimeWish  String?
+    isDead        Boolean @default(false)
+    deathReason   String?
+    notes         String?
     pets          Pet[]
     parents       Sim[] @relation("Children")
     children      Sim[] @relation("Children")
+    partnerId     Int?  @unique
+    partner       Sim?  @relation("Partner", fields: [partnerId], references: [id])
+    spouse        Sim?  @relation("Partner")
     eyeColour     String
     hairColour    String
     neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
@@ -51,6 +62,9 @@ model Pet {
     name      String
     gender    String
     career    String?
+    species   String
     owner     Sim?  @relation(fields: [ownerId], references: [id])
     ownerId   Int
+    neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
+    neighbourhoodId Int    
 }

@@ -11,14 +11,14 @@ import {
 import { useState } from "react";
 
 const SelectField = ({
-  id,
+  placeholder,
   name,
   label,
   value,
   children,
   required = false,
 }: {
-  id: string;
+  placeholder?: string;
   name: string;
   label: string;
   value: string | undefined | null;
@@ -38,7 +38,7 @@ const SelectField = ({
         required={required}
       >
         <SelectTrigger className="">
-          <SelectValue placeholder={`Select a ${name}`} />
+          <SelectValue placeholder={placeholder ?? `Select a ${name}`} />
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>{children}</SelectGroup>

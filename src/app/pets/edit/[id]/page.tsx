@@ -1,4 +1,4 @@
-import { edit, get, listPartners } from "~/server/actions/sims";
+import { edit, get } from "~/server/actions/sims";
 import EditSim from "./edit-form";
 
 interface PageProps {
@@ -14,7 +14,6 @@ const SimsPage = async ({ params }: PageProps) => {
     "use server";
     await edit(simId, data);
   }
-  const partners = await listPartners(sim?.neighbourhoodId, sim)
 
   return (
     <>
@@ -23,7 +22,7 @@ const SimsPage = async ({ params }: PageProps) => {
           <h2 className="text-2xl font-bold text-black dark:text-white">
             Edit {sim.firstName} {sim.lastName}
           </h2>
-          <EditSim data={sim} editFunction={editSim} partners={partners} />
+          <EditSim data={sim} editFunction={editSim} />
         </>
       )}
     </>

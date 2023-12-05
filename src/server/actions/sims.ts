@@ -2,13 +2,49 @@
 import { type Sim } from "@prisma/client";
 import { revalidatePath } from "next/cache";
 import { db } from "~/server/db";
-
 export async function list(neighbourhoodId: number) {
   return await db.sim.findMany({
     where: {
       neighbourhoodId: neighbourhoodId,
     },
   });
+}
+
+/**
+ * List all possible partners excluding the Sim themselves.
+ * @param neighbourhoodId
+ * @param simId
+ * @returns
+ */
+export async function listPartners(
+  neighbourhoodId: number | undefined,
+  sim: Sim | null | undefined,
+) {
+  return await db.sim.findMany({
+    where: {
+      AND: {
+        neighbourhoodId: neighbourhoodId,
+        ...getOrientationFilter(sim),
+      },
+      NOT: {
+        ...(sim ? {id: sim.id} : {}),
+      },
+    },
+  });
+}
+
+function getOrientationFilter(sim: Sim | null | undefined) {
+  if (sim?.orientation == null) {
+    return null;
+  }
+  console.log("Making orientation filter ", sim.orientation, sim.gender)
+  if ("Straight" === sim.orientation) {
+    return { gender: sim.gender === "Male" ? "Female" : "Male" };
+  } else if ("Gay" === sim.orientation) {
+    return { gender: sim.gender === "Male" ? "Male" : "Female" };
+  } else {
+    return null;
+  }
 }
 
 export async function get(id: number) {
@@ -20,8 +56,9 @@ export async function get(id: number) {
       id: id,
     },
     include: {
-      neighbourhood: true
-    }
+      neighbourhood: true,
+      spouse: true,
+    },
   });
 }
 
@@ -63,27 +100,20 @@ export async function createSim(neighbourhoodId: number, sim: Sim) {
 }
 
 export async function create(neighbourhoodId: number, data: FormData) {
-  const createData = {
-    firstName: data.get("firstName"),
-    lastName: data.get("lastName"),
-    gender: data.get("gender"),
-    race: data.get("race"),
-    lifestage: data.get("lifestage"),
-    orientation: data.get("orientation"),
-    zodiac: data.get("zodiac"),
-    aspiration: data.get("aspiration"),
-    career: data.get("career"),
-    hobby: data.get("hobby"),
-    hairColour: data.get("hairColour"),
-    eyeColour: data.get("eyeColour"),
-  };
-  const response = await createSim(neighbourhoodId, createData as Sim);  
+  const createData = convertFormData(data);
+  const response = await createSim(neighbourhoodId, createData);
   revalidatePath(`/sims/${neighbourhoodId}`);
   return response;
 }
 
 export async function edit(id: number, data: FormData) {
-  const simData = {
+  const simData = convertFormData(data);
+  const editedSim = await editSim(id, simData);
+  revalidatePath(`/sims/${editedSim?.response.neighbourhoodId}`);
+}
+
+function convertFormData(data: FormData): Sim {
+  return {
     firstName: data.get("firstName"),
     lastName: data.get("lastName"),
     gender: data.get("gender"),
@@ -92,13 +122,17 @@ export async function edit(id: number, data: FormData) {
     orientation: data.get("orientation"),
     zodiac: data.get("zodiac"),
     aspiration: data.get("aspiration"),
+    secondAspiration: data.get("secondAspiration"),
     career: data.get("career"),
     hobby: data.get("hobby"),
+    subHobby: data.get("subHobby"),
     hairColour: data.get("hairColour"),
     eyeColour: data.get("eyeColour"),
-  };
-  const editedSim = await editSim(id, simData as Sim);
-  revalidatePath(`/sims/${editedSim?.response.neighbourhoodId}`)
+    partnerId: data.get("partner") ? parseInt(data.get("partner") as string, 10) : null,
+    lifetimeWish: data.get("lifetimeWish"),
+    isDead: data.get("isDead") == "true",
+    deathReason: data.get("deathReason"),
+  } as Sim;
 }
 
 export async function editSim(id: number, sim: Sim) {
