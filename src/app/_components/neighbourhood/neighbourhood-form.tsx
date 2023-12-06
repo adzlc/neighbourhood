@@ -1,7 +1,7 @@
-import { type Neighbourhood } from "@prisma/client";
 import Form from "~/app/_components/forms/form";
 import TextField from "~/app/_components/forms/textfield";
 import TextArea from "../forms/textarea";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 const NeighbourhoodForm = ({
   submitAction,

@@ -1,5 +1,6 @@
-import { edit, get } from "~/server/actions/sims";
-import EditSim from "./edit-form";
+import { edit, get } from "~/server/actions/pets";
+import EditPet from "./edit-form";
+import { list } from "~/server/actions/sims";
 
 interface PageProps {
   params: {
@@ -8,21 +9,25 @@ interface PageProps {
 }
 
 const SimsPage = async ({ params }: PageProps) => {
-  const simId = parseInt(params.id, 10);
-  const sim = await get(simId);
-  async function editSim(data: FormData) {
+  const petId = parseInt(params.id, 10);
+  const pet = await get(petId);
+  async function editPet(data: FormData) {
     "use server";
-    await edit(simId, data);
+    await edit(petId, data);
   }
+  if (!pet) {
+    return;
+  }
+  const sims = await list(pet?.neighbourhoodId);
 
   return (
     <>
-      {sim && (
+      {pet && (
         <>
           <h2 className="text-2xl font-bold text-black dark:text-white">
-            Edit {sim.firstName} {sim.lastName}
+            Edit {pet.name}
           </h2>
-          <EditSim data={sim} editFunction={editSim} />
+          <EditPet data={pet} editFunction={editPet} sims={sims} />
         </>
       )}
     </>

@@ -1,10 +1,10 @@
-import { type Sim } from "@prisma/client";
 import FormOnly from "../forms/form-only";
 import DemoContainer from "../ui/demo-container";
 import SimsBirthForm from "./sims-birth-form";
 import SimsPersonalityForm from "./sims-personality-form";
 import SimsFeaturesForm from "./features-form";
 import SimsLoveForm from "./sims-love";
+import { type SimWithSpouse, type Sim } from "~/data/sim-typings";
 
 const SimsForm = ({
   submitAction,
@@ -14,7 +14,7 @@ const SimsForm = ({
   children,
 }: {
   submitAction: (input: FormData) => Promise<void>;
-  data?: Sim | null | undefined;
+  data?: SimWithSpouse | null | undefined;
   partners?: Sim[];
   neighbourhoodId: number;
   children?: React.ReactNode;

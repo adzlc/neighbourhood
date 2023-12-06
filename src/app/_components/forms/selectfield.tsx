@@ -5,6 +5,7 @@ import {
   Select,
   SelectContent,
   SelectGroup,
+  SelectItem,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
@@ -17,15 +18,17 @@ const SelectField = ({
   value,
   children,
   required = false,
+  allowBlank = true,
 }: {
   placeholder?: string;
   name: string;
   label: string;
   value: string | undefined | null;
   required?: boolean;
+  allowBlank?: boolean;
   children: React.ReactNode;
 }) => {
-  const [formValue, setFormValue] = useState<string>(value ?? "");
+  const [formValue, setFormValue] = useState<string | undefined>(value ?? "");
   return (
     <div>
       <div className="mb-2 block">
@@ -34,14 +37,24 @@ const SelectField = ({
       <Select
         name={name}
         value={formValue}
-        onValueChange={(value) => setFormValue(value)}
+        onValueChange={(value) => {
+          setFormValue(value === "notset" ? undefined : value);
+        }}
         required={required}
+        defaultValue={""}
       >
         <SelectTrigger className="">
           <SelectValue placeholder={placeholder ?? `Select a ${name}`} />
         </SelectTrigger>
         <SelectContent>
-          <SelectGroup>{children}</SelectGroup>
+          <SelectGroup>
+            {allowBlank && (
+              <SelectItem key="notset" value="notset">
+                {"Not set"}
+              </SelectItem>
+            )}
+            {children}
+          </SelectGroup>
         </SelectContent>
       </Select>
     </div>

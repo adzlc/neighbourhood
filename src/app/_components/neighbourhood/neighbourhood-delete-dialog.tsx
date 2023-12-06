@@ -1,5 +1,4 @@
 "use client";
-import { type Neighbourhood } from "@prisma/client";
 import {
   Dialog,
   DialogContent,
@@ -13,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "~/app/_components/ui/input";
 import { useState } from "react";
 import { DialogClose } from "@/components/ui/dialog";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 const NeighbourhoodDeleteDialog = ({
   deleteAction,

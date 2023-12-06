@@ -1,14 +1,14 @@
 "use client";
-import { type Sim } from "@prisma/client";
 import { useRouter } from "next/navigation";
 import SimsForm from "~/app/_components/sim/sims-form";
+import { type SimWithSpouse, type Sim } from "~/data/sim-typings";
 
 const EditSim = ({
   data,
   partners,
   editFunction,
 }: {
-  data: Sim;
+  data: SimWithSpouse;
   partners: Sim[]
   editFunction: (data: FormData) => Promise<void>;
 }) => {

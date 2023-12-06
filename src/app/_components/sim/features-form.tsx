@@ -1,5 +1,4 @@
 import { SelectItem } from "@/components/ui/select";
-import { type Sim } from "@prisma/client";
 import SelectField from "~/app/_components/forms/selectfield";
 import {
   Card,
@@ -8,7 +7,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { eyecolours, haircolours, zodiacs } from "~/data/sim-typings";
+import { type Sim, eyecolours, haircolours, zodiacs } from "~/data/sim-typings";
 
 const SimsFeaturesForm = ({ data }: { data?: Sim | null | undefined }) => {
   return (
@@ -39,6 +38,7 @@ const SimsFeaturesForm = ({ data }: { data?: Sim | null | undefined }) => {
             label="Hair Colour"
             value={data?.hairColour}
             placeholder="Select a hair colour"
+            allowBlank={false}
           >
             {haircolours?.map((hairColour) => (
               <SelectItem key={hairColour} value={hairColour}>
@@ -51,6 +51,7 @@ const SimsFeaturesForm = ({ data }: { data?: Sim | null | undefined }) => {
             label="Eye Colour"
             value={data?.eyeColour}
             placeholder="Select an eye colour"
+            allowBlank={false}
           >
             {eyecolours?.map((eyeColour) => (
               <SelectItem key={eyeColour} value={eyeColour}>

@@ -1,8 +1,7 @@
 import { SelectItem } from "@/components/ui/select";
-import { type Sim } from "@prisma/client";
 import SelectField from "~/app/_components/forms/selectfield";
 import TextField from "~/app/_components/forms/textfield";
-import { lifeStages, races } from "~/data/sim-typings";
+import { type Sim, lifeStages, races } from "~/data/sim-typings";
 import {
   Card,
   CardContent,
@@ -70,7 +69,13 @@ const SimsBirthForm = ({ data }: { data?: Sim | null | undefined }) => {
             value={data?.lastName}
             required
           />
-          <SelectField name="race" label="Race" value={data?.race ?? "Human"}>
+          <SelectField
+            name="race"
+            label="Race"
+            value={data?.race ?? "Human"}
+            allowBlank={false}
+            required
+          >
             {races?.map((race) => (
               <SelectItem key={race} value={race}>
                 {race}
@@ -82,6 +87,7 @@ const SimsBirthForm = ({ data }: { data?: Sim | null | undefined }) => {
             label="Age"
             value={data?.lifestage ?? "Baby"}
             placeholder="Select an age"
+            allowBlank={false}
           >
             {lifeStages?.map((lifestage) => (
               <SelectItem key={lifestage} value={lifestage}>

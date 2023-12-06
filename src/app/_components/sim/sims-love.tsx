@@ -1,5 +1,4 @@
 import { SelectItem } from "@/components/ui/select";
-import { type Sim } from "@prisma/client";
 import SelectField from "~/app/_components/forms/selectfield";
 import {
   Card,
@@ -10,14 +9,17 @@ import {
 } from "@/components/ui/card";
 import {
   orientations,
+  type SimWithSpouse,
+  type Sim
 } from "~/data/sim-typings";
 const SimsLoveForm = ({
   partners,
   data,
 }: {
   partners?: Sim[];
-  data?: Sim | null | undefined;
+  data?: SimWithSpouse | null | undefined;
 }) => {
+  console.log('Loading data', data);
   return (
     <>
       <Card>
@@ -41,8 +43,9 @@ const SimsLoveForm = ({
           <SelectField
             name="partner"
             label="Partner"
-            value={data?.partnerId ? data?.partnerId?.toString() : data?.spouse?.id?.toString()}
+            value={""}
             placeholder="Select a partner"
+            
           >
             {partners?.map((partner) => (
               <SelectItem key={partner.id} value={partner.id.toString()}>

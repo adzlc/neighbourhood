@@ -15,8 +15,8 @@ const SimsPage = async ({ params }: PageProps) => {
   const sims = await list(neighbourhoodId);
   async function createSim(data: FormData) {
     "use server"
-    const pet = await create(neighbourhoodId, data);
-    redirect(`/sims/${neighbourhoodId}`);
+    await create(neighbourhoodId, data);
+    redirect(`/pets/${neighbourhoodId}`);
   }
 
   return (

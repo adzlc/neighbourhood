@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { cn } from "~/app/lib/utils";
-import { Neighbourhood } from "@prisma/client";
 import Link from "next/link";
-import { get } from "~/server/actions/neighbourhoods";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLDivElement> {
   neighbourhood?: Neighbourhood | undefined | null;

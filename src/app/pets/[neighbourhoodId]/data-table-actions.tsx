@@ -18,19 +18,19 @@ import { Button } from "~/app/_components/ui/button";
 import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { Input } from "~/app/_components/ui/input";
-import { type Sim } from "~/data/sim-typings";
+import { type PetWithOwner } from "~/data/sim-typings";
 
 interface DataTableRowActionsProps<TData> {
-  row: Row<Sim>;
+  row: Row<PetWithOwner>;
   table: Table<TData>;
 }
 export function DataTableRowActions<TData>({
   table,
   row,
 }: DataTableRowActionsProps<TData>) {
-  const sim = row.original;
+  const pet = row.original;
   const [open, setOpen] = useState(false);
-  const [correctSimName, setCorrectSimName] = useState(false);
+  const [correctName, setCorrectName] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -43,7 +43,7 @@ export function DataTableRowActions<TData>({
         <DropdownMenuContent align="end">
           <DropdownMenuItem
             onClick={() => {
-              table.options.meta?.handleEditSim(sim.id);
+              table.options.meta?.handleEditSim(pet.id);
             }}
           >
             Edit
@@ -60,16 +60,9 @@ export function DataTableRowActions<TData>({
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
-            <DialogTitle>
-              Delete {sim.firstName} {sim.lastName}
-            </DialogTitle>
+            <DialogTitle>Delete {pet.name}</DialogTitle>
             <DialogDescription>
-              Deleting a Sim cannot be undone. To delete please enter
-              <b>
-                {" "}
-                {sim.firstName} {sim.lastName}{" "}
-              </b>{" "}
-              below.
+              Deleting a Pet cannot be undone. To delete please enter <b>{pet.name}</b> below.
             </DialogDescription>
           </DialogHeader>
 
@@ -77,29 +70,29 @@ export function DataTableRowActions<TData>({
             <div className="grid gap-4 py-4">
               <div className="items-start">
                 <Input
-                  placeholder="Enter name of Sim"
-                  id="delete-sim-check"
-                  name="delete-sim-check"
+                  placeholder="Enter name of pet"
+                  id="delete-pet-check"
+                  name="delete-pet-check"
                   className="w-60"
                   onChange={(e) => {
                     const value = e.currentTarget.value;
-                    setCorrectSimName(
-                      value === `${sim.firstName} ${sim.lastName}`,
+                    setCorrectName(
+                      value === `${pet.name}`,
                     );
                   }}
                 />
               </div>
               <div className="grid grid-cols-2 items-center gap-5">
                 <Button
-                  id="deleteSimButton"
+                  id="deletePetButton"
                   type="submit"
-                  disabled={!correctSimName}
+                  disabled={!correctName}
                   onClick={() => {
-                    table.options.meta?.handleDeleteSim(sim.id);
+                    table.options.meta?.handleDeleteSim(pet.id);
                     setOpen(false);
                   }}
                 >
-                  Delete Sim
+                  Delete Pet
                 </Button>
 
                 <DialogClose asChild>

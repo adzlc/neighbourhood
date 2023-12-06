@@ -1,8 +1,8 @@
-import type { Sim } from "@prisma/client";
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { deleteSim } from "~/server/actions/sims";
 import { revalidatePath } from "next/cache";
+import { type Sim } from "~/data/sim-typings";
 
 const SimsList = ({ data }: { data: Sim[] }) => {
   async function deleteSimAction(id: number) {

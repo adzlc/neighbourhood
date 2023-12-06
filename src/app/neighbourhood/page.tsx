@@ -1,8 +1,8 @@
-import { type Neighbourhood } from "@prisma/client";
 import NeighbourhoodForm from "../_components/neighbourhood/neighbourhood-form";
 import NeighbourhoodList from "./neighbourhood-list";
 import { createNeighbourhood, list } from "~/server/actions/neighbourhoods"; 
 import { revalidatePath } from "next/cache";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 const NeighbourhoodPage = async () => {
   const neighbourhoods = await list();

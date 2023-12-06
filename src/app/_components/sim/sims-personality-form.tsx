@@ -1,5 +1,4 @@
 import { SelectItem } from "@/components/ui/select";
-import { type Sim } from "@prisma/client";
 import SelectField from "~/app/_components/forms/selectfield";
 import {
   Card,
@@ -9,6 +8,7 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import {
+  type Sim,
   aspirations,
   careers,
   hobbies,
@@ -38,13 +38,13 @@ const SimsPersonalityForm = ({ data }: { data?: Sim | null | undefined }) => {
             ))}
           </SelectField>
           <SelectField
-            name="secondaryAspiration"
+            name="secondAspiration"
             label="Secondary Aspiration"
             value={data?.secondAspiration}
             placeholder="Select a secondary aspiration"
           >
             {aspirations?.map((aspiration) => (
-              <SelectItem key={aspiration} value={aspiration}>
+              <SelectItem key={"second" + aspiration} value={aspiration}>
                 {aspiration}
               </SelectItem>
             ))}

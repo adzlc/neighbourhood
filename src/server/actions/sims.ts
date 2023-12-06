@@ -1,7 +1,14 @@
 "use server";
-import { type Sim } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { type Sim } from "~/data/sim-typings";
 import { db } from "~/server/db";
+import { checkNotSet } from "./utils";
+
+/**
+ * List all sims for a Neighbourhood.
+ * @param neighbourhoodId ID of the Neighbourhood.
+ * @returns Array of Sim.
+ */
 export async function list(neighbourhoodId: number) {
   return await db.sim.findMany({
     where: {
@@ -27,7 +34,7 @@ export async function listPartners(
         ...getOrientationFilter(sim),
       },
       NOT: {
-        ...(sim ? {id: sim.id} : {}),
+        ...(sim ? { id: sim.id } : {}),
       },
     },
   });
@@ -37,7 +44,7 @@ function getOrientationFilter(sim: Sim | null | undefined) {
   if (sim?.orientation == null) {
     return null;
   }
-  console.log("Making orientation filter ", sim.orientation, sim.gender)
+  console.log("Making orientation filter ", sim.orientation, sim.gender);
   if ("Straight" === sim.orientation) {
     return { gender: sim.gender === "Male" ? "Female" : "Male" };
   } else if ("Gay" === sim.orientation) {
@@ -112,30 +119,7 @@ export async function edit(id: number, data: FormData) {
   revalidatePath(`/sims/${editedSim?.response.neighbourhoodId}`);
 }
 
-function convertFormData(data: FormData): Sim {
-  return {
-    firstName: data.get("firstName"),
-    lastName: data.get("lastName"),
-    gender: data.get("gender"),
-    race: data.get("race"),
-    lifestage: data.get("lifestage"),
-    orientation: data.get("orientation"),
-    zodiac: data.get("zodiac"),
-    aspiration: data.get("aspiration"),
-    secondAspiration: data.get("secondAspiration"),
-    career: data.get("career"),
-    hobby: data.get("hobby"),
-    subHobby: data.get("subHobby"),
-    hairColour: data.get("hairColour"),
-    eyeColour: data.get("eyeColour"),
-    partnerId: data.get("partner") ? parseInt(data.get("partner") as string, 10) : null,
-    lifetimeWish: data.get("lifetimeWish"),
-    isDead: data.get("isDead") == "true",
-    deathReason: data.get("deathReason"),
-  } as Sim;
-}
-
-export async function editSim(id: number, sim: Sim) {
+async function editSim(id: number, sim: Sim) {
   try {
     console.log("Sim being updated", sim);
     const response = await db.sim.update({
@@ -148,4 +132,29 @@ export async function editSim(id: number, sim: Sim) {
   } catch (e) {
     console.log(e);
   }
+}
+
+function convertFormData(data: FormData): Sim {
+  return {
+    firstName: data.get("firstName"),
+    lastName: data.get("lastName"),
+    gender: data.get("gender"),
+    race: data.get("race"),
+    lifestage: checkNotSet(data.get("lifestage")),
+    orientation: checkNotSet(data.get("orientation")),
+    zodiac: checkNotSet(data.get("zodiac")),
+    aspiration: checkNotSet(data.get("aspiration")),
+    secondAspiration: checkNotSet(data.get("secondAspiration")),
+    career: checkNotSet(data.get("career")),
+    hobby: checkNotSet(data.get("hobby")),
+    subHobby: checkNotSet(data.get("subHobby")),
+    hairColour: checkNotSet(data.get("hairColour")),
+    eyeColour: checkNotSet(data.get("eyeColour")),
+    partnerId: checkNotSet(data.get("partner"))
+      ? parseInt(data.get("partner") as string, 10)
+      : null,
+    lifetimeWish: data.get("lifetimeWish"),
+    isDead: data.get("isDead") == "true",
+    deathReason: data.get("deathReason"),
+  } as Sim;
 }

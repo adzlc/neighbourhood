@@ -56,7 +56,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     meta: {
-      handleEditSim: (id: number) => router.push(`/sims/edit/${id}`),
+      handleEditSim: (id: number) => router.push(`/pets/edit/${id}`),
       handleDeleteSim: (id: number) => {
         deleteSim(id);
       },

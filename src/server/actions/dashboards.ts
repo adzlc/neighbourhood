@@ -1,7 +1,7 @@
 "use server";
-import { type Sim } from "@prisma/client";
 import { db } from "~/server/db";
 import { type PieChartType } from "~/data/dashboard-typings";
+import { type Sim } from "~/data/sim-typings";
 
 export async function getEyeColourData(neighbourhoodId: number) {
   return list(neighbourhoodId, (sim) => sim.eyeColour);

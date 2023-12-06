@@ -1,6 +1,6 @@
 "use server";
-import { type Neighbourhood } from "@prisma/client";
 import { revalidatePath } from "next/cache";
+import { type Neighbourhood } from "~/data/sim-typings";
 import { db } from "~/server/db";
 
 export async function list() {

@@ -64,7 +64,7 @@ model Pet {
     career    String?
     species   String
     owner     Sim?  @relation(fields: [ownerId], references: [id])
-    ownerId   Int
+    ownerId   Int?
     neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
     neighbourhoodId Int    
 }

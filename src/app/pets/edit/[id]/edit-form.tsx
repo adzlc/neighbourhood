@@ -1,25 +1,34 @@
-"use client"
-import { type Sim } from "@prisma/client";
+"use client";
 import { useRouter } from "next/navigation";
-import SimsForm from "~/app/_components/sim/sims-form";
+import PetsForm from "~/app/_components/pet/pets-form";
+import { type Sim, type Pet } from "~/data/sim-typings";
 
-const EditSim = ({ data, editFunction }: {data: Sim, editFunction: (data: FormData) => Promise<void>}) => {
-  const sim = data;
+const EditPet = ({
+  data,
+  editFunction,
+  sims,
+}: {
+  data: Pet;
+  editFunction: (data: FormData) => Promise<void>;
+  sims?: Sim[];
+}) => {
+  const pet = data;
   const router = useRouter();
 
   async function editSim(data: FormData) {
     await editFunction(data);
-    router.push(`/sims/${sim.neighbourhoodId}`);
+    router.push(`/pets/${pet.neighbourhoodId}`);
   }
-  
+
   return (
     <>
-      {sim && (
+      {pet && (
         <>
-          <SimsForm
-            data={sim}
-            neighbourhoodId={sim.neighbourhoodId}
+          <PetsForm
+            data={pet}
+            neighbourhoodId={pet.neighbourhoodId}
             submitAction={editSim}
+            sims={sims}
           />
         </>
       )}
@@ -27,4 +36,4 @@ const EditSim = ({ data, editFunction }: {data: Sim, editFunction: (data: FormDa
   );
 };
 
-export default EditSim;
+export default EditPet;

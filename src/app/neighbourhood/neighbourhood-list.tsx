@@ -1,5 +1,5 @@
-import type { Neighbourhood } from "@prisma/client";
 import Link from "next/link";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 const NeighbourhoodList = ({
   neighbourhoods,

@@ -1,3 +1,21 @@
+import {
+  type Prisma,
+  type Sim as SimPrisma,
+  type Pet as PetPrisma,
+  type Neighbourhood as NeighbourhoodPrisma,
+} from "@prisma/client";
+
+export type Sim = SimPrisma;
+export type Neighbourhood = NeighbourhoodPrisma;
+export type Pet = PetPrisma;
+export type SimWithSpouse = Prisma.SimGetPayload<{
+  include: { spouse: true };
+}>;
+
+export type PetWithOwner = Prisma.PetGetPayload<{
+  include: { owner: true };
+}>;
+
 export const genders = ["Female", "Male"];
 export const orientations = ["Straight", "Gay", "Bisexual"];
 export const races = [

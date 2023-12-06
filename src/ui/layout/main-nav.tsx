@@ -1,8 +1,5 @@
 "use client";
 import Link from "next/link";
-
-import { type Neighbourhood } from "@prisma/client";
-import { cn } from "~/app/lib/utils";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -12,8 +9,9 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "~/app/_components/ui/navigation-menu";
-import { FaCat } from "react-icons/fa";
+import { FaCat, FaHome } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
+import { type Neighbourhood } from "~/data/sim-typings";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   neighbourhood?: Neighbourhood | undefined | null;
@@ -34,15 +32,35 @@ export function MainNav({ className, neighbourhood, ...props }: SidebarProps) {
           {neighbourhood && (
             <>
               <NavigationMenuItem>
-                <Link
-                  href={`/sims/${neighbourhood.id}`}
-                  legacyBehavior
-                  passHref
-                >
-                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                    Visit Neighbourhood
-                  </NavigationMenuLink>
-                </Link>
+              <NavigationMenuTrigger>Visit</NavigationMenuTrigger>
+                <NavigationMenuContent>
+                  <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                    <li className="row-span-1">
+                      <a
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href={`/sims/${neighbourhood.id}`}
+                      >
+                        <FaHome  />
+                        <div className="mb-2 mt-4 text-lg font-medium">Neighbourhood</div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                          {`View the ${neighbourhood.name}'s Sims.`}
+                        </p>
+                      </a>
+                    </li>
+                    <li className="row-span-1">
+                      <a
+                        className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                        href={`/pets/${neighbourhood.id}`}
+                      >
+                        <FaCat />
+                        <div className="mb-2 mt-4 text-lg font-medium">Pets</div>
+                        <p className="text-sm leading-tight text-muted-foreground">
+                        {`View the ${neighbourhood.name}'s Pets.`}
+                        </p>
+                      </a>
+                    </li>
+                  </ul>
+                </NavigationMenuContent>
               </NavigationMenuItem>
               <NavigationMenuItem>
                 <Link

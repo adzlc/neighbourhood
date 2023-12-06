@@ -1,9 +1,9 @@
 "use client";
-import { type Sim } from "@prisma/client";
 import { type Column, type ColumnDef } from "@tanstack/react-table";
 import { DataTableRowActions } from "./data-table-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
+import { type Sim } from "~/data/sim-typings";
 
 const sortFunction = (name: string, column: Column<Sim>) => {
   return (
