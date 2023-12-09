@@ -4,24 +4,11 @@ import {
   type Sim,
   PetInput,
   type PetFormValues,
-  petcareers,
 } from "~/data/sim-typings";
-
 import DemoContainer from "../ui/demo-container";
-
-import { Button } from "../ui/button";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Form, FormDescription, FormMessage } from "../ui/form";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
-import { Input } from "../ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+import { Form } from "../ui/form";
 import PetBirthForm from "./pet-birth-form";
 import PetDeathForm from "./pet-death-form";
 

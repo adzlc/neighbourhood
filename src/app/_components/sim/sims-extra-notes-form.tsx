@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { type SimFormValues, type Sim } from "~/data/sim-typings";
+import { type SimFormValues } from "~/data/sim-typings";
 import { Checkbox } from "../ui/checkbox";
 import {
   FormControl,
@@ -17,7 +17,7 @@ import {
 import { useFormContext } from "react-hook-form";
 import { Textarea } from "../ui/textarea";
 
-const SimsExtraNotesForm = ({ data }: { data?: Sim | null | undefined }) => {
+const SimsExtraNotesForm = () => {
   const form = useFormContext<SimFormValues>();
   return (
     <>

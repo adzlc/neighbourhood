@@ -26,7 +26,6 @@ import { Button } from "~/app/_components/ui/button";
 import { type CSSProperties, useState } from "react";
 import { DataTableFilters } from "./data-table-filters";
 import { type Sim } from "~/data/sim-typings";
-import { killPet } from "~/server/actions/pets";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];

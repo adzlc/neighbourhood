@@ -2,7 +2,6 @@ import { Separator } from "@/components/ui/separator";
 import { Tabs } from "@/components/ui/tabs";
 import { get } from "~/server/actions/neighbourhoods";
 import { MainNav } from "~/ui/layout/main-nav";
-import Navbar from "~/ui/layout/sidebar";
 
 export default async function AdminLayout({
   children,

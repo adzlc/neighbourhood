@@ -1,13 +1,8 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
 import { useRef } from "react";
 import { Form } from "../ui/form";
 import { useForm } from "react-hook-form";
-import { Neighbourhood, Pet, Sim } from "~/data/sim-typings";
-import * as z from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
-
 const FormOnly = ({
   children,
   className = '',

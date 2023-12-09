@@ -1,4 +1,4 @@
-import { type Sim, lifeStages, races, SimFormValues } from "~/data/sim-typings";
+import { lifeStages, races, type SimFormValues } from "~/data/sim-typings";
 import {
   Card,
   CardContent,

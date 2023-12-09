@@ -15,7 +15,6 @@ import {
   FormLabel,
 } from "../ui/form";
 import { useFormContext } from "react-hook-form";
-import { Textarea } from "../ui/textarea";
 
 const PetDeathForm = () => {
   const form = useFormContext<PetFormValues>();

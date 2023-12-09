@@ -20,7 +20,7 @@ const EditNeighbourhoodPage = async ({ params }: PageProps) => {
 
   async function deleteAction(id: string) {
     "use server";
-    await deleteNeighbourhood(params.id);
+    await deleteNeighbourhood(id);
     redirect('/');
   }
   const neighbourhood = await get(neighbourhoodId);
