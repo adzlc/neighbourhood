@@ -18,12 +18,22 @@ export type PetWithOwner = Prisma.PetGetPayload<{
 }>;
 
 export const SimInput = z.object({
-  firstName: z.string().min(1),
-  lastName: z.string().min(1),
-  gender: z.string().min(1),
-  race: z.string().min(1),
+  firstName: z.string().min(1, {
+    message: "First name is required.",
+  }),
+  lastName: z.string().min(1, {
+    message: "Last name is required.",
+  }),
+  gender: z.string().min(1, {
+    message: "Gender is required.",
+  }),
+  race: z.string().min(1, {
+    message: "Race is required.",
+  }),
   orientation: z.string().optional(),
-  lifestage: z.string().min(1),
+  lifestage: z.string().min(1, {
+    message: "Age is required.",
+  }),
   aspiration: z.string().optional(),
   secondAspiration: z.string().optional(),
   maritalStatus: z.string().optional(),
@@ -37,20 +47,29 @@ export const SimInput = z.object({
   notes: z.string().optional(),
   partnerId: z.string().optional(),
   neighbourhoodId: z.string(),
-  eyeColour: z.string().min(1),
-  hairColour: z.string().min(1),
+  eyeColour: z.string().min(1, {
+    message: "Eye colour is required.",
+  }),
+  hairColour: z.string().min(1, {
+    message: "Hair colour is required.",
+  }),
 });
 
 export type SimFormValues = z.infer<typeof SimInput>;
 
 export const PetInput = z.object({
-  name: z.string().min(1),
-  gender: z.string().min(1),
-  species: z.string().min(1),
+  name: z.string({ required_error: "Name is required" }).min(1, {
+    message: "Name is required.",
+  }),
+  gender: z.string({ required_error: "Gender is required" }).min(1, {
+    message: "Gender is required.",
+  }),
+  species: z.string({ required_error: "Species is required" }).min(1, {
+    message: "Species is required.",
+  }),
   career: z.string().optional(),
   ownerId: z.string().optional(),
   isDead: z.boolean().default(false),
-  deathReason: z.string().optional(),
 });
 
 export type PetFormValues = z.infer<typeof PetInput>;

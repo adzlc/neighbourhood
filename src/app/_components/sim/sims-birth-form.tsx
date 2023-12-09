@@ -89,6 +89,7 @@ const SimsBirthForm = () => {
                 <FormControl>
                   <Input placeholder="Choose a first name" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -101,6 +102,7 @@ const SimsBirthForm = () => {
                 <FormControl>
                   <Input placeholder="Choose a last name" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

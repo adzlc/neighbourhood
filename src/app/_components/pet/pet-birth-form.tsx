@@ -61,6 +61,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                         </div>
                       </div>
                     </FormLabel>
+                    <FormMessage />
                   </FormItem>
                   <FormItem>
                     <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
@@ -76,6 +77,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                         </div>
                       </div>
                     </FormLabel>
+                    <FormMessage />
                   </FormItem>
                 </RadioGroup>
               </FormItem>
@@ -123,6 +125,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                       </div>
                     </FormLabel>
                   </FormItem>
+                  <FormMessage />
                 </RadioGroup>
               </FormItem>
             )}
@@ -136,6 +139,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                 <FormControl>
                   <Input placeholder="Choose a name" {...field} />
                 </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -159,6 +163,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                     ))}
                   </SelectContent>
                 </Select>
+                <FormMessage />
               </FormItem>
             )}
           />
@@ -183,6 +188,7 @@ const PetBirthForm = ({ sims }: { sims?: Sim[] }) => {
                     ))}
                   </SelectContent>
                 </Select>
+                <FormMessage />
               </FormItem>
             )}
           />

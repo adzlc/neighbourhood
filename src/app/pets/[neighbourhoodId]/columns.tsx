@@ -27,6 +27,10 @@ export const columns: ColumnDef<PetWithOwner>[] = [
     header: ({ column }) => sortFunction('Name', column),
   },
   {
+    accessorKey: "species",
+    header: ({ column }) => sortFunction('Species', column),
+  },
+  {
     accessorKey: "career",
     header:  ({ column }) => sortFunction('Career', column),
   },

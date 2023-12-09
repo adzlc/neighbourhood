@@ -43,7 +43,6 @@ const PetsForm = ({
     career: data?.career ?? undefined,
     ownerId: data?.ownerId ?? undefined,
     isDead: data?.isDead ?? false,
-    deathReason: data?.deathReason ?? ""
   };
 
   const form = useForm<PetFormValues>({
