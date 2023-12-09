@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { type Pet } from "~/data/sim-typings";
+import { type Pet, PetFormValues } from "~/data/sim-typings";
 import { db } from "~/server/db";
 import { checkNotSet } from "./utils";
 
@@ -9,7 +9,7 @@ import { checkNotSet } from "./utils";
  * @param neighbourhoodId ID of the Neighbourhood.
  * @returns Array of Sim.
  */
-export async function list(neighbourhoodId: number) {
+export async function list(neighbourhoodId: string) {
   return await db.pet.findMany({
     where: {
       neighbourhoodId: neighbourhoodId,
@@ -20,8 +20,8 @@ export async function list(neighbourhoodId: number) {
   });
 }
 
-export async function get(id: number) {
-  if (isNaN(id)) {
+export async function get(id: string) {
+  if (id == null || id == "") {
     return null;
   }
   return await db.pet.findUnique({
@@ -35,7 +35,7 @@ export async function get(id: number) {
   });
 }
 
-async function creatPet(neighbourhoodId: number, pet: Pet) {
+async function createPet(neighbourhoodId: string, pet: Pet) {
   try {
     pet.neighbourhoodId = neighbourhoodId;
     console.log("Pet being created", pet);
@@ -48,20 +48,19 @@ async function creatPet(neighbourhoodId: number, pet: Pet) {
   }
 }
 
-export async function create(neighbourhoodId: number, data: FormData) {
-  const createData = convertFormData(data);
-  const response = await creatPet(neighbourhoodId, createData);
+export async function create(neighbourhoodId: string, data: PetFormValues) {
+  console.log("Creating pet ", data);
+  const response = await createPet(neighbourhoodId, data as Pet);
   revalidatePath(`/pets/${neighbourhoodId}`);
   return response;
 }
 
-export async function edit(id: number, data: FormData) {
-  const petData = convertFormData(data);
-  const editedPet = await editPet(id, petData);
+export async function edit(id: string, data: PetFormValues) {
+  const editedPet = await editPet(id, data as Pet);
   revalidatePath(`/pets/${editedPet?.response.neighbourhoodId}`);
 }
 
-async function editPet(id: number, pet: Pet) {
+async function editPet(id: string, pet: Pet) {
   try {
     console.log("Pet being updated", pet);
     const response = await db.pet.update({
@@ -76,7 +75,7 @@ async function editPet(id: number, pet: Pet) {
   }
 }
 
-export async function deletePet(id: number) {
+export async function deletePet(id: string) {
   try {
     const response = await db.pet.delete({
       where: {
@@ -89,14 +88,23 @@ export async function deletePet(id: number) {
   }
 }
 
-function convertFormData(data: FormData): Pet {
-  const owner = checkNotSet(data.get("owner"));
-  const ownerId = owner === null ? null : parseInt(owner as string, 10);
-  return {
-    name: data.get("name"),
-    species: data.get("species"),
-    gender: data.get("gender"),
-    career: checkNotSet(data.get("career")),
-    ownerId: ownerId,
-  } as Pet;
+export async function killPet(
+  id: string,
+  kill: boolean,
+  reason: string | undefined,
+) {
+  try {
+    const response = await db.pet.update({
+      where: {
+        id: id,
+      },
+      data: {
+        isDead: kill,
+        deathReason: reason,
+      },
+    });
+    return { response };
+  } catch (e) {
+    console.log(e);
+  }
 }

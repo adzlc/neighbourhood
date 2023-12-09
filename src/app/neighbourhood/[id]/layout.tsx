@@ -11,7 +11,7 @@ export default async function AdminLayout({
   children: React.ReactNode;
   params: { id: string };
 }) {
-  const neighbourhood = await get(parseInt(params.id, 10));
+  const neighbourhood = await get(params.id);
   return (
     <div className="hidden flex-col md:flex">
       <div className="border-b">

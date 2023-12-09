@@ -1,6 +1,6 @@
 import { Separator } from "@/components/ui/separator";
 import { Tabs } from "@/components/ui/tabs";
-import { get } from "~/server/actions/sims";
+import { get } from "~/server/actions/pets";
 import { MainNav } from "~/ui/layout/main-nav";
 
 export default async function  Layout({
@@ -10,7 +10,7 @@ export default async function  Layout({
   children: React.ReactNode;
   params: { id: string };
 }) {
-  const sim = await get(parseInt(params.id, 10));
+  const sim = await get(params.id);
   const neighbourhood = sim?.neighbourhood;
   return (
     <div className="hidden flex-col md:flex">

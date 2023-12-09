@@ -1,5 +1,6 @@
 import { edit, get, listPartners } from "~/server/actions/sims";
 import EditSim from "./edit-form";
+import { type SimFormValues } from "~/data/sim-typings";
 
 interface PageProps {
   params: {
@@ -8,9 +9,10 @@ interface PageProps {
 }
 
 const SimsPage = async ({ params }: PageProps) => {
-  const simId = parseInt(params.id, 10);
+  const simId = params.id;
   const sim = await get(simId);
-  async function editSim(data: FormData) {
+  console.log("Located sim", sim);
+  async function editSim(data: SimFormValues) {
     "use server";
     await edit(simId, data);
   }

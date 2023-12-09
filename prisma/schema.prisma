@@ -11,7 +11,7 @@ datasource db {
 }
 
 model Neighbourhood {
-    id          Int      @id @default(autoincrement())
+    id  String  @id @default(cuid())
     name        String
     description String?
     sims        Sim[]
@@ -21,7 +21,7 @@ model Neighbourhood {
 }
 
 model Sim {
-    id        Int      @id @default(autoincrement())
+    id  String  @id @default(cuid())
     firstName     String
     lastName      String
     gender        String
@@ -42,13 +42,13 @@ model Sim {
     pets          Pet[]
     parents       Sim[] @relation("Children")
     children      Sim[] @relation("Children")
-    partnerId     Int?  @unique
+    partnerId     String?  @unique
     partner       Sim?  @relation("Partner", fields: [partnerId], references: [id])
     spouse        Sim?  @relation("Partner")
     eyeColour     String
     hairColour    String
     neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
-    neighbourhoodId Int
+    neighbourhoodId String
 
 
     createdAt DateTime @default(now())
@@ -58,13 +58,14 @@ model Sim {
 }
 
 model Pet {
-    id        Int      @id @default(autoincrement())
+    id  String  @id @default(cuid())
     name      String
     gender    String
     career    String?
     species   String
+    isDead        Boolean @default(false)
     owner     Sim?  @relation(fields: [ownerId], references: [id])
-    ownerId   Int?
+    ownerId   String?
     neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])
-    neighbourhoodId Int    
+    neighbourhoodId String    
 }

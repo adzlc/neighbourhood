@@ -1,3 +1,4 @@
+import * as z from "zod";
 import {
   type Prisma,
   type Sim as SimPrisma,
@@ -15,6 +16,44 @@ export type SimWithSpouse = Prisma.SimGetPayload<{
 export type PetWithOwner = Prisma.PetGetPayload<{
   include: { owner: true };
 }>;
+
+export const SimInput = z.object({
+  firstName: z.string().min(1),
+  lastName: z.string().min(1),
+  gender: z.string().min(1),
+  race: z.string().min(1),
+  orientation: z.string().optional(),
+  lifestage: z.string().min(1),
+  aspiration: z.string().optional(),
+  secondAspiration: z.string().optional(),
+  maritalStatus: z.string().optional(),
+  career: z.string().optional(),
+  zodiac: z.string().optional(),
+  hobby: z.string().optional(),
+  subHobby: z.string().optional(),
+  lifetimeWish: z.string().optional(),
+  isDead: z.boolean().default(false),
+  deathReason: z.string().optional(),
+  notes: z.string().optional(),
+  partnerId: z.string().optional(),
+  neighbourhoodId: z.string(),
+  eyeColour: z.string().min(1),
+  hairColour: z.string().min(1),
+});
+
+export type SimFormValues = z.infer<typeof SimInput>;
+
+export const PetInput = z.object({
+  name: z.string().min(1),
+  gender: z.string().min(1),
+  species: z.string().min(1),
+  career: z.string().optional(),
+  ownerId: z.string().optional(),
+  isDead: z.boolean().default(false),
+  deathReason: z.string().optional(),
+});
+
+export type PetFormValues = z.infer<typeof PetInput>;
 
 export const genders = ["Female", "Male"];
 export const orientations = ["Straight", "Gay", "Bisexual"];

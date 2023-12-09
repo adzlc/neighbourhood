@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 const SimsPage = async ({ params }: PageProps) => {
-  const petId = parseInt(params.id, 10);
+  const petId = params.id;
   const pet = await get(petId);
   async function editPet(data: FormData) {
     "use server";

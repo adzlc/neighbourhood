@@ -53,6 +53,13 @@ export function DataTableRowActions<TData>({
               setOpen(true);
             }}
           >
+            {`${sim.isDead ? "Resurrect" : "Kill"}`}
+          </DropdownMenuItem>
+          <DropdownMenuItem
+            onClick={() => {
+              setOpen(true);
+            }}
+          >
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
@@ -100,6 +107,56 @@ export function DataTableRowActions<TData>({
                   }}
                 >
                   Delete Sim
+                </Button>
+
+                <DialogClose asChild>
+                  <Button type="button" variant="secondary">
+                    Cancel
+                  </Button>
+                </DialogClose>
+              </div>
+            </div>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>
+            {`${sim.isDead ? "Resurrect" : "Kill"}`} {sim.firstName} {sim.lastName}
+            </DialogTitle>
+            <DialogDescription>
+              To {`${sim.isDead ? "resurrect" : "kill"}`} the Sim, please enter <b>{sim.firstName} {sim.lastName}</b> below.
+            </DialogDescription>
+          </DialogHeader>
+
+          <DialogFooter className="sm:justify-start">
+            <div className="grid gap-4 py-4">
+              <div className="items-start">
+                <Input
+                  placeholder="Enter name of Sim"
+                  id="kill-sim-check"
+                  name="kill-sim-check"
+                  className="w-60"
+                  onChange={(e) => {
+                    const value = e.currentTarget.value;
+                    setCorrectSimName(
+                      value === `${sim.firstName} ${sim.lastName}`,
+                    );
+                  }}
+                />
+              </div>
+              <div className="grid grid-cols-2 items-center gap-5">
+                <Button
+                  id="killSimButton"
+                  type="submit"
+                  disabled={!correctSimName}
+                  onClick={() => {
+                    table.options.meta?.handleKillSim(sim.id, sim.isDead);
+                    setOpen(false);
+                  }}
+                >
+                  {`${sim.isDead ? "Resurrect" : "Kill"} Sim`}
                 </Button>
 
                 <DialogClose asChild>

@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { type Sim } from "~/data/sim-typings";
+import { type SimFormValues, type Sim } from "~/data/sim-typings";
 import { db } from "~/server/db";
 import { checkNotSet } from "./utils";
 
@@ -9,7 +9,7 @@ import { checkNotSet } from "./utils";
  * @param neighbourhoodId ID of the Neighbourhood.
  * @returns Array of Sim.
  */
-export async function list(neighbourhoodId: number) {
+export async function list(neighbourhoodId: string) {
   return await db.sim.findMany({
     where: {
       neighbourhoodId: neighbourhoodId,
@@ -24,7 +24,7 @@ export async function list(neighbourhoodId: number) {
  * @returns
  */
 export async function listPartners(
-  neighbourhoodId: number | undefined,
+  neighbourhoodId: string | undefined,
   sim: Sim | null | undefined,
 ) {
   return await db.sim.findMany({
@@ -54,8 +54,8 @@ function getOrientationFilter(sim: Sim | null | undefined) {
   }
 }
 
-export async function get(id: number) {
-  if (isNaN(id)) {
+export async function get(id: string) {
+  if (id == null || id == "") {
     return null;
   }
   return await db.sim.findUnique({
@@ -69,8 +69,8 @@ export async function get(id: number) {
   });
 }
 
-export async function getNeighbour(id: number) {
-  if (isNaN(id)) {
+export async function getNeighbour(id: string) {
+  if (id == null || id == "") {
     return null;
   }
   return await db.sim.findUnique({
@@ -80,7 +80,28 @@ export async function getNeighbour(id: number) {
   });
 }
 
-export async function deleteSim(id: number) {
+export async function killSim(
+  id: string,
+  kill: boolean,
+  reason: string | undefined,
+) {
+  try {
+    const response = await db.sim.update({
+      where: {
+        id: id,
+      },
+      data: {
+        isDead: kill,
+        deathReason: reason,
+      },
+    });
+    return { response };
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function deleteSim(id: string) {
   try {
     const response = await db.sim.delete({
       where: {
@@ -93,7 +114,7 @@ export async function deleteSim(id: number) {
   }
 }
 
-export async function createSim(neighbourhoodId: number, sim: Sim) {
+export async function createSim(neighbourhoodId: string, sim: Sim) {
   try {
     sim.neighbourhoodId = neighbourhoodId;
     console.log("Sim being created", sim);
@@ -106,20 +127,18 @@ export async function createSim(neighbourhoodId: number, sim: Sim) {
   }
 }
 
-export async function create(neighbourhoodId: number, data: FormData) {
-  const createData = convertFormData(data);
-  const response = await createSim(neighbourhoodId, createData);
+export async function create(neighbourhoodId: string, data: SimFormValues) {
+  const response = await createSim(neighbourhoodId, data as Sim);
   revalidatePath(`/sims/${neighbourhoodId}`);
   return response;
 }
 
-export async function edit(id: number, data: FormData) {
-  const simData = convertFormData(data);
-  const editedSim = await editSim(id, simData);
+export async function edit(id: string, data: SimFormValues) {
+  const editedSim = await editSim(id, data as Sim);
   revalidatePath(`/sims/${editedSim?.response.neighbourhoodId}`);
 }
 
-async function editSim(id: number, sim: Sim) {
+async function editSim(id: string, sim: Sim) {
   try {
     console.log("Sim being updated", sim);
     const response = await db.sim.update({
@@ -132,29 +151,4 @@ async function editSim(id: number, sim: Sim) {
   } catch (e) {
     console.log(e);
   }
-}
-
-function convertFormData(data: FormData): Sim {
-  return {
-    firstName: data.get("firstName"),
-    lastName: data.get("lastName"),
-    gender: data.get("gender"),
-    race: data.get("race"),
-    lifestage: checkNotSet(data.get("lifestage")),
-    orientation: checkNotSet(data.get("orientation")),
-    zodiac: checkNotSet(data.get("zodiac")),
-    aspiration: checkNotSet(data.get("aspiration")),
-    secondAspiration: checkNotSet(data.get("secondAspiration")),
-    career: checkNotSet(data.get("career")),
-    hobby: checkNotSet(data.get("hobby")),
-    subHobby: checkNotSet(data.get("subHobby")),
-    hairColour: checkNotSet(data.get("hairColour")),
-    eyeColour: checkNotSet(data.get("eyeColour")),
-    partnerId: checkNotSet(data.get("partner"))
-      ? parseInt(data.get("partner") as string, 10)
-      : null,
-    lifetimeWish: data.get("lifetimeWish"),
-    isDead: data.get("isDead") == "true",
-    deathReason: data.get("deathReason"),
-  } as Sim;
 }

@@ -26,17 +26,20 @@ import { Button } from "~/app/_components/ui/button";
 import { type CSSProperties, useState } from "react";
 import { DataTableFilters } from "./data-table-filters";
 import { type Sim } from "~/data/sim-typings";
+import { killPet } from "~/server/actions/pets";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  deleteSim: (id: number) => void;
+  deleteSim: (id: string) => void;
+  killSim: (id: string, kill: boolean, reason: string | undefined) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   deleteSim,
+  killSim
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -56,13 +59,16 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     meta: {
-      handleEditSim: (id: number) => router.push(`/pets/edit/${id}`),
-      handleDeleteSim: (id: number) => {
+      handleEditSim: (id: string) => router.push(`/pets/edit/${id}`),
+      handleKillSim: (id: string, kill: boolean) => {
+        killSim(id, kill, undefined);
+      },
+      handleDeleteSim: (id: string) => {
         deleteSim(id);
       },
       getRowStyles: (row: Row<Sim>): CSSProperties => {
         return {
-          background: row.original.gender === "Male" ? "#93c5fd" : "#fca5a5",
+          background: row.original.isDead ? "#94A3B8" : row.original.gender === "Male" ? "#93c5fd" : "#fca5a5",
         };
       },
     },

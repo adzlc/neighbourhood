@@ -3,7 +3,7 @@ import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardAspiration = async ({ id }: { id: number }) => {
+const DashboardAspiration = async ({ id }: { id: string }) => {
   const data = await getAspirationData(id);
 
   return (

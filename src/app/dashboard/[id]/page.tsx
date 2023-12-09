@@ -19,7 +19,7 @@ interface PageProps {
 }
 
 const DashboardsPage = async ({ params }: PageProps) => {
-  const neighbourhoodId = parseInt(params.id, 10);
+  const neighbourhoodId = params.id;
 
   return (
     <>

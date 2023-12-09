@@ -3,47 +3,47 @@ import { db } from "~/server/db";
 import { type PieChartType } from "~/data/dashboard-typings";
 import { type Sim } from "~/data/sim-typings";
 
-export async function getEyeColourData(neighbourhoodId: number) {
+export async function getEyeColourData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.eyeColour);
 }
 
-export async function getGenderData(neighbourhoodId: number) {
+export async function getGenderData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.gender);
 }
 
-export async function getOrientationData(neighbourhoodId: number) {
+export async function getOrientationData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.orientation);
 }
 
-export async function getHairColourData(neighbourhoodId: number) {
+export async function getHairColourData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.hairColour);
 }
 
-export async function getAgeData(neighbourhoodId: number) {
+export async function getAgeData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.lifestage);
 }
 
-export async function getLastnameData(neighbourhoodId: number) {
+export async function getLastnameData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.lastName);
 }
 
-export async function getHobbyData(neighbourhoodId: number) {
+export async function getHobbyData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.hobby);
 }
 
-export async function getAspirationData(neighbourhoodId: number) {
+export async function getAspirationData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.aspiration);
 }
 
-export async function getCareerData(neighbourhoodId: number) {
+export async function getCareerData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.career);
 }
 
-export async function getZodiacData(neighbourhoodId: number) {
+export async function getZodiacData(neighbourhoodId: string) {
   return list(neighbourhoodId, (sim) => sim.zodiac);
 }
 
-async function list(neighbourhoodId: number, valueFunction: (sim: Sim) => string | null) {
+async function list(neighbourhoodId: string, valueFunction: (sim: Sim) => string | null) {
   const simData = await db.sim.findMany({
     where: {
       neighbourhoodId: neighbourhoodId,

@@ -7,8 +7,8 @@ export async function list() {
   return await db.neighbourhood.findMany();
 }
 
-export async function get(id: number) {
-  if (isNaN(id)) {
+export async function get(id: string) {
+  if (id == null || id == "") {
     return null;
   }
   return await db.neighbourhood.findUnique({
@@ -49,12 +49,12 @@ export async function editNeighbourhood(data: FormData) {
     name: data.get("name"),
     description: data.get("description"),
   };
-  const neighbourhoodId = parseInt(data.get("id") as string, 10);
+  const neighbourhoodId = data.get("id") as string;
   await updateNeighbourhood(neighbourhoodId, inputData as Neighbourhood);
 }
 
 export async function updateNeighbourhood(
-  id: number,
+  id: string,
   neighbourhood: Neighbourhood,
 ) {
   try {
@@ -72,7 +72,7 @@ export async function updateNeighbourhood(
   }
 }
 
-export async function deleteNeighbourhood(id: number) {
+export async function deleteNeighbourhood(id: string) {
   try {
     const response = await db.neighbourhood.delete({
       where: {

@@ -2,7 +2,7 @@ import { list } from "~/server/actions/sims";
 import PetsForm from "~/app/_components/pet/pets-form";
 import { create } from "~/server/actions/pets";
 import { redirect } from "next/navigation";
-
+import { type PetFormValues } from "~/data/sim-typings";
 interface PageProps {
   params: {
     neighbourhoodId: string;
@@ -10,10 +10,10 @@ interface PageProps {
 }
 
 const SimsPage = async ({ params }: PageProps) => {
-  const neighbourhoodId = parseInt(params.neighbourhoodId, 10);
+  const neighbourhoodId =params.neighbourhoodId;
 
   const sims = await list(neighbourhoodId);
-  async function createSim(data: FormData) {
+  async function createAction(data: PetFormValues) {
     "use server"
     await create(neighbourhoodId, data);
     redirect(`/pets/${neighbourhoodId}`);
@@ -21,7 +21,7 @@ const SimsPage = async ({ params }: PageProps) => {
 
   return (
     <>
-      <PetsForm neighbourhoodId={neighbourhoodId} submitAction={createSim} sims={sims} />
+      <PetsForm neighbourhoodId={neighbourhoodId} submitAction={createAction} sims={sims} />
     </>
   );
 };

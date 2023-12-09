@@ -2,6 +2,11 @@
 
 import { Button } from "@/components/ui/button";
 import { useRef } from "react";
+import { Form } from "../ui/form";
+import { useForm } from "react-hook-form";
+import { Neighbourhood, Pet, Sim } from "~/data/sim-typings";
+import * as z from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 const FormOnly = ({
   children,
@@ -12,9 +17,11 @@ const FormOnly = ({
   className?: string;
   onSubmit: (input: FormData) => void;
 }) => {
+  const form = useForm();
   const formRef = useRef<HTMLFormElement>(null);
 
   return (
+    <Form {...form}>
     <form
       className={`${className}`}
       ref={formRef}
@@ -22,6 +29,7 @@ const FormOnly = ({
     >
       {children}
     </form>
+    </Form>
   );
 };
 export default FormOnly;

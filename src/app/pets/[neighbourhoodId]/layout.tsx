@@ -10,7 +10,7 @@ export default async function  Layout({
   children: React.ReactNode;
   params: { neighbourhoodId: string };
 }) {
-  const neighbourhood = await get(parseInt(params.neighbourhoodId, 10));
+  const neighbourhood = await get(params.neighbourhoodId);
   return (
     <div className="hidden flex-col md:flex">
       <div className="border-b">

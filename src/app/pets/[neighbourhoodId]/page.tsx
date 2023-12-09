@@ -10,8 +10,7 @@ interface PageProps {
 }
 
 const PetsPage = async ({ params }: PageProps) => {
-  const neighbourhoodId = parseInt(params.neighbourhoodId, 10);
-  const pets = await list(neighbourhoodId);
+  const pets = await list(params.neighbourhoodId);
 
   return (
     <>

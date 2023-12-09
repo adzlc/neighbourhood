@@ -1,5 +1,11 @@
-import { SelectItem } from "@/components/ui/select";
-import SelectField from "~/app/_components/forms/selectfield";
+"use client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Card,
   CardContent,
@@ -7,19 +13,15 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import {
-  orientations,
-  type SimWithSpouse,
-  type Sim
-} from "~/data/sim-typings";
+import { orientations, type Sim, type SimFormValues } from "~/data/sim-typings";
+import { useFormContext } from "react-hook-form";
+import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 const SimsLoveForm = ({
   partners,
-  data,
 }: {
   partners?: Sim[];
-  data?: SimWithSpouse | null | undefined;
 }) => {
-  console.log('Loading data', data);
+  const form = useFormContext<SimFormValues>();
   return (
     <>
       <Card>
@@ -28,31 +30,67 @@ const SimsLoveForm = ({
           <CardDescription>Fill in your Sim's love life.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
-          <SelectField
+        <FormField
+            control={form.control}
             name="orientation"
-            label="Orientation"
-            value={data?.orientation}
-            placeholder="Select an orientation"
-          >
-            {orientations?.map((orientation) => (
-              <SelectItem key={orientation} value={orientation}>
-                {orientation}
-              </SelectItem>
-            ))}
-          </SelectField>
-          <SelectField
-            name="partner"
-            label="Partner"
-            value={""}
-            placeholder="Select a partner"
-            
-          >
-            {partners?.map((partner) => (
-              <SelectItem key={partner.id} value={partner.id.toString()}>
-                {partner.firstName} {partner.lastName}
-              </SelectItem>
-            ))}
-          </SelectField>
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Orientation</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose an orientation" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {orientations?.map((orientation) => (
+                      <SelectItem key={orientation} value={orientation}>
+                        {orientation}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+        <FormField
+            control={form.control}
+            name="partnerId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Partner</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a partner" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {partners?.map((partner) => (
+                      <SelectItem
+                        key={partner.id}
+                        value={partner.id}
+                      >
+                        {partner.firstName} {partner.lastName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
         </CardContent>
       </Card>
     </>

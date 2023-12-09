@@ -3,7 +3,7 @@ import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardCareer = async ({ id }: { id: number }) => {
+const DashboardCareer = async ({ id }: { id: string }) => {
   const data = await getCareerData(id);
 
   return (

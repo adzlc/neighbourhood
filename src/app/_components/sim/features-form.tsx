@@ -1,5 +1,12 @@
-import { SelectItem } from "@/components/ui/select";
-import SelectField from "~/app/_components/forms/selectfield";
+"use client";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import {
   Card,
   CardContent,
@@ -7,9 +14,17 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { type Sim, eyecolours, haircolours, zodiacs } from "~/data/sim-typings";
+import {
+  type SimFormValues,
+  eyecolours,
+  haircolours,
+  zodiacs,
+} from "~/data/sim-typings";
+import { useFormContext } from "react-hook-form";
 
-const SimsFeaturesForm = ({ data }: { data?: Sim | null | undefined }) => {
+const SimsFeaturesForm = () => {
+  const form = useFormContext<SimFormValues>();
+
   return (
     <>
       <Card>
@@ -20,45 +35,87 @@ const SimsFeaturesForm = ({ data }: { data?: Sim | null | undefined }) => {
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
-          <SelectField
+          <FormField
+            control={form.control}
             name="zodiac"
-            label="Zodiac"
-            value={data?.zodiac}
-            placeholder="Select a zodiac"
-          >
-            {zodiacs?.map((zodiac) => (
-              <SelectItem key={zodiac} value={zodiac}>
-                {zodiac}
-              </SelectItem>
-            ))}
-          </SelectField>
-
-          <SelectField
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Zodiac</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a zodiac" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {zodiacs?.map((zodiac) => (
+                      <SelectItem key={zodiac} value={zodiac}>
+                        {zodiac}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="hairColour"
-            label="Hair Colour"
-            value={data?.hairColour}
-            placeholder="Select a hair colour"
-            allowBlank={false}
-          >
-            {haircolours?.map((hairColour) => (
-              <SelectItem key={hairColour} value={hairColour}>
-                {hairColour}
-              </SelectItem>
-            ))}
-          </SelectField>
-          <SelectField
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Hair Colour</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a hair colour" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {haircolours?.map((hairColour) => (
+                      <SelectItem key={hairColour} value={hairColour}>
+                        {hairColour}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="eyeColour"
-            label="Eye Colour"
-            value={data?.eyeColour}
-            placeholder="Select an eye colour"
-            allowBlank={false}
-          >
-            {eyecolours?.map((eyeColour) => (
-              <SelectItem key={eyeColour} value={eyeColour}>
-                {eyeColour}
-              </SelectItem>
-            ))}
-          </SelectField>
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Eye Colour</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose an eye colour" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    {eyecolours?.map((eyeColour) => (
+                      <SelectItem key={eyeColour} value={eyeColour}>
+                        {eyeColour}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
         </CardContent>
       </Card>
     </>

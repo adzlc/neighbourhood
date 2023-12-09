@@ -1,6 +1,7 @@
 import { create, listPartners } from "~/server/actions/sims";
 import { redirect } from "next/navigation";
 import SimsForm from "~/app/_components/sim/sims-form";
+import { type SimFormValues } from "~/data/sim-typings";
 
 interface PageProps {
   params: {
@@ -10,8 +11,8 @@ interface PageProps {
 
 const SimsPage = async ({ params }: PageProps) => {
 
-  const neighbourhoodId = parseInt(params.neighbourhoodId, 10);
-  async function createSim(data: FormData) {
+  const neighbourhoodId = params.neighbourhoodId;
+  async function createSim(data: SimFormValues) {
     "use server";
     await create(neighbourhoodId, data);
     redirect(`/sims/${neighbourhoodId}`);

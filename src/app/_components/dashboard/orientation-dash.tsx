@@ -3,7 +3,7 @@ import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardOrientation = async ({ id }: { id: number }) => {
+const DashboardOrientation = async ({ id }: { id: string }) => {
   const data = await getOrientationData(id);
 
   return (

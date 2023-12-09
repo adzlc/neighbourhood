@@ -3,7 +3,7 @@ import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardZodiac = async ({ id }: { id: number }) => {
+const DashboardZodiac = async ({ id }: { id: string }) => {
   const data = await getZodiacData(id);
 
   return (

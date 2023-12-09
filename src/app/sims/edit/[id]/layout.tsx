@@ -10,7 +10,7 @@ export default async function  Layout({
   children: React.ReactNode;
   params: { id: string };
 }) {
-  const sim = await get(parseInt(params.id, 10));
+  const sim = await get(params.id);
   const neighbourhood = sim?.neighbourhood;
   return (
     <div className="hidden flex-col md:flex">
@@ -29,8 +29,8 @@ export default async function  Layout({
       <Separator />
       <Tabs defaultValue="complete" className="flex-1">
         <div className="container h-full py-6">
-          <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px]">
-            <div className="hidden flex-col space-y-4 sm:flex md:order-2">
+          <div className="grid h-full items-stretch gap-6">
+            <div className="hidden flex-col sm:flex md:order-2">
               {children}
             </div>
           </div>

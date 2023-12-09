@@ -1,5 +1,4 @@
-import { SelectItem } from "@/components/ui/select";
-import SelectField from "~/app/_components/forms/selectfield";
+"use client";
 import {
   Card,
   CardContent,
@@ -8,62 +7,147 @@ import {
   CardDescription,
 } from "@/components/ui/card";
 import {
-  type Sim,
   aspirations,
   careers,
   hobbies,
+  type SimFormValues,
 } from "~/data/sim-typings";
+import { useFormContext } from "react-hook-form";
+import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
-const SimsPersonalityForm = ({ data }: { data?: Sim | null | undefined }) => {
+const SimsPersonalityForm = () => {
+  const form = useFormContext<SimFormValues>();
   return (
     <>
       <Card>
         <CardHeader>
           <CardTitle>Aspirations & Personality</CardTitle>
-          <CardDescription>
-            Fill in your Sim's aspirations.
-          </CardDescription>
+          <CardDescription>Fill in your Sim's aspirations.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
-          <SelectField
+          <FormField
+            control={form.control}
             name="aspiration"
-            label="Aspiration"
-            value={data?.aspiration}
-            placeholder="Select an aspiration"
-          >
-            {aspirations?.map((aspiration) => (
-              <SelectItem key={aspiration} value={aspiration}>
-                {aspiration}
-              </SelectItem>
-            ))}
-          </SelectField>
-          <SelectField
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Aspiration</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose an aspiration" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {aspirations?.map((aspiration) => (
+                      <SelectItem key={aspiration} value={aspiration}>
+                        {aspiration}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
             name="secondAspiration"
-            label="Secondary Aspiration"
-            value={data?.secondAspiration}
-            placeholder="Select a secondary aspiration"
-          >
-            {aspirations?.map((aspiration) => (
-              <SelectItem key={"second" + aspiration} value={aspiration}>
-                {aspiration}
-              </SelectItem>
-            ))}
-          </SelectField>
-
-          <SelectField name="career" label="Career" value={data?.career}>
-            {careers?.map((career) => (
-              <SelectItem key={career} value={career}>
-                {career}
-              </SelectItem>
-            ))}
-          </SelectField>
-          <SelectField name="hobby" label="Hobby" value={data?.hobby}>
-            {hobbies?.map((hobby) => (
-              <SelectItem key={hobby} value={hobby}>
-                {hobby}
-              </SelectItem>
-            ))}
-          </SelectField>
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Secondary Aspiration</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a secondary aspiration" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {aspirations?.map((aspiration) => (
+                      <SelectItem key={aspiration} value={aspiration}>
+                        {aspiration}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="career"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Career</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a career" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {careers?.map((career) => (
+                      <SelectItem key={career} value={career}>
+                        {career}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="hobby"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Hobby</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a hobby" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {hobbies?.map((hobby) => (
+                      <SelectItem key={hobby} value={hobby}>
+                        {hobby}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
         </CardContent>
       </Card>
     </>

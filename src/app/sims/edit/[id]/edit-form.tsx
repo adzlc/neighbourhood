@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import SimsForm from "~/app/_components/sim/sims-form";
-import { type SimWithSpouse, type Sim } from "~/data/sim-typings";
+import { type SimWithSpouse, type Sim, type SimFormValues } from "~/data/sim-typings";
 
 const EditSim = ({
   data,
@@ -10,12 +10,12 @@ const EditSim = ({
 }: {
   data: SimWithSpouse;
   partners: Sim[]
-  editFunction: (data: FormData) => Promise<void>;
+  editFunction: (data: SimFormValues) => Promise<void>;
 }) => {
   const sim = data;
   const router = useRouter();
 
-  async function editSim(data: FormData) {
+  async function editSim(data: SimFormValues) {
     await editFunction(data);
     router.push(`/sims/${sim.neighbourhoodId}`);
   }

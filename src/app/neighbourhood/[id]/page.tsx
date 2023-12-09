@@ -16,12 +16,11 @@ interface PageProps {
 
 
 const EditNeighbourhoodPage = async ({ params }: PageProps) => {
-  const neighbourhoodId = parseInt(params.id, 10);
+  const neighbourhoodId = params.id;
 
-  async function deleteAction(id: number) {
+  async function deleteAction(id: string) {
     "use server";
-    const neighbourhoodId = parseInt(params.id, 10);
-    await deleteNeighbourhood(neighbourhoodId);
+    await deleteNeighbourhood(params.id);
     redirect('/');
   }
   const neighbourhood = await get(neighbourhoodId);

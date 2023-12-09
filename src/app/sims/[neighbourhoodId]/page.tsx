@@ -9,7 +9,7 @@ interface PageProps {
 }
 
 const SimsPage = async ({ params }: PageProps) => {
-  const neighbourhoodId = parseInt(params.neighbourhoodId, 10);
+  const neighbourhoodId =params.neighbourhoodId;
   const sims = await list(neighbourhoodId);
 
   return (

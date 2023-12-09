@@ -18,7 +18,7 @@ const NeighbourhoodDeleteDialog = ({
   deleteAction,
   neighbourhood,
 }: {
-  deleteAction: (id: number) => Promise<void>;
+  deleteAction: (id: string) => Promise<void>;
   neighbourhood: Neighbourhood;
 }) => {
   const [correctName, setCorrectName] = useState(false);

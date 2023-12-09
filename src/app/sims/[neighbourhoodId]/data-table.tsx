@@ -30,13 +30,15 @@ import { type Sim } from "~/data/sim-typings";
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  deleteSim: (id: number) => void;
+  deleteSim: (id: string) => void;
+  killSim: (id: string, kill: boolean, reason: string | undefined) => void;
 }
 
 export function DataTable<TData, TValue>({
   columns,
   data,
   deleteSim,
+  killSim,
 }: DataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
@@ -56,13 +58,16 @@ export function DataTable<TData, TValue>({
       columnFilters,
     },
     meta: {
-      handleEditSim: (id: number) => router.push(`/sims/edit/${id}`),
-      handleDeleteSim: (id: number) => {
+      handleEditSim: (id: string) => router.push(`/sims/edit/${id}`),
+      handleDeleteSim: (id: string) => {
         deleteSim(id);
+      },
+      handleKillSim: (id: string, kill: boolean) => {
+        killSim(id, !kill, "");
       },
       getRowStyles: (row: Row<Sim>): CSSProperties => {
         return {
-          background: row.original.gender === "Male" ? "#93c5fd" : "#fca5a5",
+          background: row.original.isDead ? "#94A3B8" : row.original.gender === "Male" ? "#93c5fd" : "#fca5a5",
         };
       },
     },
