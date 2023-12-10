@@ -104,49 +104,21 @@ export function MainNav({ className, neighbourhood, ...props }: SidebarProps) {
                   </ul>
                 </NavigationMenuContent>
               </NavigationMenuItem>
+              <NavigationMenuItem>
+                <Link
+                  href={`/neighbourhood/${neighbourhood.id}`}
+                  legacyBehavior
+                  passHref
+                >
+                  <NavigationMenuLink className={navigationMenuTriggerStyle()}>
+                    Edit Neighbourhood
+                  </NavigationMenuLink>
+                </Link>
+              </NavigationMenuItem>              
             </>
           )}
         </NavigationMenuList>
       </NavigationMenu>
-      {/* <nav
-        className={cn("flex items-center space-x-4 lg:space-x-6", className)}
-        {...props}
-      >
-        <Link
-          href="/"
-          className="text-sm font-medium transition-colors hover:text-primary"
-        >
-          Home
-        </Link>
-        {neighbourhood && (
-          <>
-            <Link
-              href={`/sims/${neighbourhood.id}`}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              List Sims
-            </Link>
-            <Link
-              href={`/dashboard/${neighbourhood.id}`}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              Dashboards
-            </Link>
-            <Link
-              href={`/sims/create/${neighbourhood.id}`}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              Create Sim
-            </Link>
-            <Link
-              href={`/neighbourhood/${neighbourhood.id}`}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-            >
-              Edit Neighbourhood
-            </Link>
-          </>
-        )}
-      </nav> */}
     </>
   );
 }

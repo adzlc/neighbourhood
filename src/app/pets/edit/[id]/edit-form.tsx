@@ -1,7 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
 import PetsForm from "~/app/_components/pet/pets-form";
-import { type Sim, type Pet } from "~/data/sim-typings";
+import { type Sim, type Pet, type PetFormValues } from "~/data/sim-typings";
 
 const EditPet = ({
   data,
@@ -9,13 +9,13 @@ const EditPet = ({
   sims,
 }: {
   data: Pet;
-  editFunction: (data: FormData) => Promise<void>;
+  editFunction: (data: PetFormValues) => Promise<void>;
   sims?: Sim[];
 }) => {
   const pet = data;
   const router = useRouter();
 
-  async function editSim(data: FormData) {
+  async function editSim(data: PetFormValues) {
     await editFunction(data);
     router.push(`/pets/${pet.neighbourhoodId}`);
   }

@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { type Neighbourhood } from "~/data/sim-typings";
+import { type NeighbourhoodFormValues, type Neighbourhood } from "~/data/sim-typings";
 import { db } from "~/server/db";
 
 export async function list() {
@@ -18,13 +18,8 @@ export async function get(id: string) {
   });
 }
 
-export async function create(data: FormData) {
-  "use server";
-  const createData = {
-    name: data.get("name") as string,
-    description: data.get("description") as string,
-  };
-  const response = await createNeighbourhood(createData as Neighbourhood);
+export async function create(neighbourhood: NeighbourhoodFormValues) {
+  const response = await createNeighbourhood(neighbourhood as Neighbourhood);
   if (response) {
     revalidatePath(`/`);
   }
@@ -44,13 +39,8 @@ export async function createNeighbourhood(neighbourhood: Neighbourhood) {
 }
 
 
-export async function editNeighbourhood(data: FormData) {
-  const inputData = {
-    name: data.get("name"),
-    description: data.get("description"),
-  };
-  const neighbourhoodId = data.get("id") as string;
-  await updateNeighbourhood(neighbourhoodId, inputData as Neighbourhood);
+export async function editNeighbourhood(id: string, data: NeighbourhoodFormValues) {
+  await updateNeighbourhood(id, data as Neighbourhood);
 }
 
 export async function updateNeighbourhood(

@@ -25,7 +25,7 @@ const NeighbourhoodDeleteDialog = ({
   const [open, setOpen] = useState(false);
   return (
     <>
-      <div className="flex max-w-md flex-col gap-4 ">
+      <div className="flex justify-end gap-6">
         <Dialog  open={open} onOpenChange={setOpen}>
           <DialogTrigger asChild>
             <div className="flex justify-end">
@@ -63,7 +63,7 @@ const NeighbourhoodDeleteDialog = ({
                   disabled={!correctName}
                   onClick={async () =>  {
                     await deleteAction(neighbourhood.id);
-                    setOpen(false);
+                    // setOpen(false);
                   }}
                 >
                   Delete

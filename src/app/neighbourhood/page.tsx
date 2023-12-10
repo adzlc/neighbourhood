@@ -1,18 +1,15 @@
 import NeighbourhoodForm from "../_components/neighbourhood/neighbourhood-form";
 import NeighbourhoodList from "./neighbourhood-list";
-import { createNeighbourhood, list } from "~/server/actions/neighbourhoods"; 
+import { create, list } from "~/server/actions/neighbourhoods"; 
 import { revalidatePath } from "next/cache";
-import { type Neighbourhood } from "~/data/sim-typings";
+import { type NeighbourhoodFormValues, type Neighbourhood } from "~/data/sim-typings";
 
 const NeighbourhoodPage = async () => {
   const neighbourhoods = await list();
 
-  async function create(data: FormData) {
+  async function createAction(data: NeighbourhoodFormValues) {
     "use server";
-    const createData = {
-      name: data.get("name") as string,
-    } as Neighbourhood;
-    await createNeighbourhood(createData);
+    await create(data);
     revalidatePath("/");
   }
 
@@ -22,7 +19,7 @@ const NeighbourhoodPage = async () => {
       <NeighbourhoodList neighbourhoods={neighbourhoods} />
 
       <h2 className="mt-10 text-2xl font-bold text-green-400">New Neighbourhood</h2>
-      <NeighbourhoodForm submitAction={create} />
+      <NeighbourhoodForm submitAction={createAction} />
     </>
   );
 };

@@ -17,6 +17,15 @@ export type PetWithOwner = Prisma.PetGetPayload<{
   include: { owner: true };
 }>;
 
+export const NeighbourhoodInput = z.object({
+  name: z.string().min(1, {
+    message: "Name is required.",
+  }),
+  description: z.string().optional(),
+});
+
+export type NeighbourhoodFormValues = z.infer<typeof NeighbourhoodInput>;
+
 export const SimInput = z.object({
   firstName: z.string().min(1, {
     message: "First name is required.",

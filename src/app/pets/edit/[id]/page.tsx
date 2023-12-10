@@ -1,6 +1,7 @@
 import { edit, get } from "~/server/actions/pets";
 import EditPet from "./edit-form";
 import { list } from "~/server/actions/sims";
+import { PetFormValues } from "~/data/sim-typings";
 
 interface PageProps {
   params: {
@@ -11,7 +12,7 @@ interface PageProps {
 const SimsPage = async ({ params }: PageProps) => {
   const petId = params.id;
   const pet = await get(petId);
-  async function editPet(data: FormData) {
+  async function editPet(data: PetFormValues) {
     "use server";
     await edit(petId, data);
   }
