@@ -1,8 +1,8 @@
-import NeighbourhoodForm from "../_components/neighbourhood/neighbourhood-form";
 import NeighbourhoodList from "./neighbourhood-list";
 import { create, list } from "~/server/actions/neighbourhoods"; 
 import { revalidatePath } from "next/cache";
-import { type NeighbourhoodFormValues, type Neighbourhood } from "~/data/sim-typings";
+import { type NeighbourhoodFormValues } from "~/data/sim-typings";
+import NeighbourhoodForm from "~/app/_components/neighbourhood/neighbourhood-form";
 
 const NeighbourhoodPage = async () => {
   const neighbourhoods = await list();

@@ -14,7 +14,6 @@ interface PageProps {
   };
 }
 
-
 const EditNeighbourhoodPage = async ({ params }: PageProps) => {
   const neighbourhoodId = params.id;
 

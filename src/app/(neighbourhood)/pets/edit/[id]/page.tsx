@@ -1,7 +1,7 @@
 import { edit, get } from "~/server/actions/pets";
 import EditPet from "./edit-form";
 import { list } from "~/server/actions/sims";
-import { PetFormValues } from "~/data/sim-typings";
+import { type PetFormValues } from "~/data/sim-typings";
 
 interface PageProps {
   params: {

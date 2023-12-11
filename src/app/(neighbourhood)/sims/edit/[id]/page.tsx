@@ -11,7 +11,7 @@ interface PageProps {
 const SimsPage = async ({ params }: PageProps) => {
   const simId = params.id;
   const sim = await get(simId);
-  console.log("Located sim", sim);
+  
   async function editSim(data: SimFormValues) {
     "use server";
     await edit(simId, data);

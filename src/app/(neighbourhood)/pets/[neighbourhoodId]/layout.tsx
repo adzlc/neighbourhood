@@ -1,4 +1,4 @@
-import MainLayout from "~/app/_components/ui/layouts/main-layout";
+import NeighbourhoodMainLayout from "~/app/_components/ui/layouts/neighbourhood-main-layout";
 
 export default async function  Layout({
   children,
@@ -8,6 +8,6 @@ export default async function  Layout({
   params: { neighbourhoodId: string };
 }) {
   return (
-    <MainLayout neighbourhoodId={params.neighbourhoodId} children={children} />
+    <NeighbourhoodMainLayout neighbourhoodId={params.neighbourhoodId} children={children} />
   );
 }

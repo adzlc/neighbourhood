@@ -1,17 +1,16 @@
 import { Separator } from "@/components/ui/separator";
 import { Tabs } from "@/components/ui/tabs";
-import { get } from "~/server/actions/neighbourhoods";
 import { MainNav } from "~/app/_components/ui/layouts/main-nav";
 import Image from "next/image";
+import { type Neighbourhood } from "~/data/sim-typings";
 
-export default async function  MainLayout({
+export default function  MainLayout({
   children,
-  neighbourhoodId,
+  neighbourhood,
 }: {
   children: React.ReactNode;
-  neighbourhoodId: string;
+  neighbourhood: Neighbourhood | null | undefined;
 }) {
-  const neighbourhood = await get(neighbourhoodId);
   return (
     <div className="hidden flex-col md:flex">
       <div className="border-b">
