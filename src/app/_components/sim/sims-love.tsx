@@ -13,15 +13,22 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { orientations, type Sim, type SimFormValues } from "~/data/sim-typings";
+import {
+  maritalStatus,
+  orientations,
+  type Sim,
+  type SimFormValues,
+} from "~/data/sim-typings";
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "../ui/form";
 import { Input } from "../ui/input";
-const SimsLoveForm = ({
-  partners,
-}: {
-  partners?: Sim[];
-}) => {
+const SimsLoveForm = ({ partners }: { partners?: Sim[] }) => {
   const form = useFormContext<SimFormValues>();
   return (
     <>
@@ -31,7 +38,7 @@ const SimsLoveForm = ({
           <CardDescription>Fill in your Sim's love life.</CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
-        <FormField
+          <FormField
             control={form.control}
             name="orientation"
             render={({ field }) => (
@@ -65,15 +72,32 @@ const SimsLoveForm = ({
             name="maritalStatus"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Marital Status</FormLabel>
-                <FormControl>
-                  <Input placeholder="Choose a martial status" {...field} />
-                </FormControl>
-                <FormMessage />
+                <FormLabel>Partner</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a marital status" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {maritalStatus?.map((status) => (
+                      <SelectItem key={status} value={status}>
+                        {" "}
+                        {status}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </FormItem>
             )}
           />
-        <FormField
+          <FormField
             control={form.control}
             name="partnerId"
             render={({ field }) => (
@@ -93,10 +117,7 @@ const SimsLoveForm = ({
                       {"Not set"}
                     </SelectItem>
                     {partners?.map((partner) => (
-                      <SelectItem
-                        key={partner.id}
-                        value={partner.id}
-                      >
+                      <SelectItem key={partner.id} value={partner.id}>
                         {partner.firstName} {partner.lastName}
                       </SelectItem>
                     ))}
