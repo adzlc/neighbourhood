@@ -104,7 +104,7 @@ const NeighbourhoodForm = ({
                     </div>
                   </DemoContainer>
                   <div className="mt-6 flex justify-end gap-6">
-                    <Button type="submit">Create</Button>
+                    <Button type="submit">{data == null ? "Create" : "Save"}</Button>
                   </div>
                 </CardContent>
               </Card>

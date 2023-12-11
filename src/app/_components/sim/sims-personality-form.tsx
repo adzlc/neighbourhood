@@ -13,7 +13,7 @@ import {
   type SimFormValues,
 } from "~/data/sim-typings";
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
 import {
   Select,
   SelectContent,
@@ -21,6 +21,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { Input } from "../ui/input";
 
 const SimsPersonalityForm = () => {
   const form = useFormContext<SimFormValues>();
@@ -145,6 +146,19 @@ const SimsPersonalityForm = () => {
                     ))}
                   </SelectContent>
                 </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="subHobby"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Sub-Hobby</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose a sub-hobby" {...field} />
+                </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

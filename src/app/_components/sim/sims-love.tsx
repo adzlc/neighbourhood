@@ -15,7 +15,8 @@ import {
 } from "@/components/ui/card";
 import { orientations, type Sim, type SimFormValues } from "~/data/sim-typings";
 import { useFormContext } from "react-hook-form";
-import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
+import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Input } from "../ui/input";
 const SimsLoveForm = ({
   partners,
 }: {
@@ -59,6 +60,19 @@ const SimsLoveForm = ({
               </FormItem>
             )}
           />
+          <FormField
+            control={form.control}
+            name="maritalStatus"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Marital Status</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose a martial status" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         <FormField
             control={form.control}
             name="partnerId"
@@ -88,6 +102,45 @@ const SimsLoveForm = ({
                     ))}
                   </SelectContent>
                 </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="turnOn"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Turn on</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose a turn on" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="secondTurnOn"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Turn on 2</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose a second turn on" {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="turnOff"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Turn off</FormLabel>
+                <FormControl>
+                  <Input placeholder="Choose a turn off" {...field} />
+                </FormControl>
+                <FormMessage />
               </FormItem>
             )}
           />

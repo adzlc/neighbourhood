@@ -1,7 +1,7 @@
+
 import DashboardEyeColour from "~/app/_components/dashboard/eye-colour-dash";
 import DashboardHairColour from "~/app/_components/dashboard/hair-colour-dash";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-
 import DashboardGender from "~/app/_components/dashboard/gender-dash";
 import DashboardOrientation from "~/app/_components/dashboard/orientation-dash";
 import DashboardAge from "~/app/_components/dashboard/age-dash";

@@ -56,6 +56,9 @@ export const SimInput = z.object({
   notes: z.string().optional(),
   partnerId: z.string().optional(),
   neighbourhoodId: z.string(),
+  turnOn: z.string().optional(),
+  secondTurnOn: z.string().optional(),
+  turnOff: z.string().optional(),
   eyeColour: z.string().min(1, {
     message: "Eye colour is required.",
   }),
@@ -85,6 +88,7 @@ export type PetFormValues = z.infer<typeof PetInput>;
 
 export const genders = ["Female", "Male"];
 export const orientations = ["Straight", "Gay", "Bisexual"];
+export const maritalStatus = ["Single", "In relationship", "Its complicated", "Engaged", "Married", "Civil Partnership", "Divorced", "Widowed"];
 export const races = [
   "Human",
   "Werewolf",

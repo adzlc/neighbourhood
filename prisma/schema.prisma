@@ -45,6 +45,9 @@ model Sim {
     partnerId     String?  @unique
     partner       Sim?  @relation("Partner", fields: [partnerId], references: [id])
     spouse        Sim?  @relation("Partner")
+    turnOn        String?
+    secondTurnOn  String?
+    turnOff       String?
     eyeColour     String
     hairColour    String
     neighbourhood Neighbourhood @relation(fields: [neighbourhoodId], references: [id])

@@ -12,6 +12,7 @@ import {
 import { FaCat, FaHome } from "react-icons/fa";
 import { FaPerson } from "react-icons/fa6";
 import { type Neighbourhood } from "~/data/sim-typings";
+import Image from "next/image";
 
 interface SidebarProps extends React.HTMLAttributes<HTMLElement> {
   neighbourhood?: Neighbourhood | undefined | null;
@@ -21,6 +22,7 @@ export function MainNav({ className, neighbourhood, ...props }: SidebarProps) {
   return (
     <>
       <NavigationMenu>
+      
         <NavigationMenuList>
           <NavigationMenuItem>
             <Link href="/" legacyBehavior passHref>
