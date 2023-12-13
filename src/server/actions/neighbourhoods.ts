@@ -16,6 +16,9 @@ export async function list() {
     where: {
       createdById: session?.user?.id,
     },
+    orderBy: {
+      name: 'asc'
+    }
   });
 }
 
