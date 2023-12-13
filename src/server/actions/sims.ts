@@ -2,7 +2,7 @@
 import { revalidatePath } from "next/cache";
 import { type SimFormValues, type Sim } from "~/data/sim-typings";
 import { db } from "~/server/db";
-import { checkNotSet } from "./utils";
+import { getServerAuthSession } from "../auth";
 
 /**
  * List all sims for a Neighbourhood.
@@ -10,11 +10,15 @@ import { checkNotSet } from "./utils";
  * @returns Array of Sim.
  */
 export async function list(neighbourhoodId: string) {
-  return await db.sim.findMany({
-    where: {
-      neighbourhoodId: neighbourhoodId,
-    },
-  });
+  const session = await getServerAuthSession();
+  if (session) {
+    return await db.sim.findMany({
+      where: {
+        neighbourhoodId: neighbourhoodId,
+        createdById: session?.user?.id,
+      },
+    });
+  }
 }
 
 /**
@@ -27,10 +31,12 @@ export async function listPartners(
   neighbourhoodId: string | undefined,
   sim: Sim | null | undefined,
 ) {
+  const session = await getServerAuthSession();
   return await db.sim.findMany({
     where: {
       AND: {
         neighbourhoodId: neighbourhoodId,
+        createdById: session?.user?.id,
         ...getOrientationFilter(sim),
       },
       NOT: {
@@ -58,9 +64,11 @@ export async function get(id: string) {
   if (id == null || id == "") {
     return null;
   }
+  const session = await getServerAuthSession();
   return await db.sim.findUnique({
     where: {
       id: id,
+      createdById: session?.user?.id,
     },
     include: {
       neighbourhood: true,
@@ -73,9 +81,11 @@ export async function getNeighbour(id: string) {
   if (id == null || id == "") {
     return null;
   }
+  const session = await getServerAuthSession();
   return await db.sim.findUnique({
     where: {
       id: id,
+      createdById: session?.user?.id,
     },
   });
 }
@@ -86,9 +96,11 @@ export async function killSim(
   reason: string | undefined,
 ) {
   try {
+    const session = await getServerAuthSession();
     const response = await db.sim.update({
       where: {
         id: id,
+        createdById: session?.user?.id,
       },
       data: {
         isDead: kill,
@@ -103,9 +115,11 @@ export async function killSim(
 
 export async function deleteSim(id: string) {
   try {
+    const session = await getServerAuthSession();
     const response = await db.sim.delete({
       where: {
         id: id,
+        createdById: session?.user?.id,
       },
     });
     return { response };
@@ -116,12 +130,16 @@ export async function deleteSim(id: string) {
 
 export async function createSim(neighbourhoodId: string, sim: Sim) {
   try {
-    sim.neighbourhoodId = neighbourhoodId;
-    console.log("Sim being created", sim);
-    const response = await db.sim.create({
-      data: sim,
-    });
-    return { response };
+    const session = await getServerAuthSession();
+    if (session) {
+      sim.neighbourhoodId = neighbourhoodId;
+      sim.createdById = session?.user?.id;
+      console.log("Sim being created", sim);
+      const response = await db.sim.create({
+        data: sim,
+      });
+      return { response };
+    }
   } catch (e) {
     console.log(e);
   }
@@ -141,13 +159,17 @@ export async function edit(id: string, data: SimFormValues) {
 async function editSim(id: string, sim: Sim) {
   try {
     console.log("Sim being updated", sim);
-    const response = await db.sim.update({
-      where: {
-        id: id,
-      },
-      data: sim,
-    });
-    return { response };
+    const session = await getServerAuthSession();
+    if (session) {
+      const response = await db.sim.update({
+        where: {
+          id: id,
+          createdById: session?.user?.id,
+        },
+        data: sim,
+      });
+      return { response };
+    }
   } catch (e) {
     console.log(e);
   }

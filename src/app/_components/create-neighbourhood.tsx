@@ -1,42 +1,33 @@
-"use client";
+import Link from "next/link";
+import { Suspense } from "react";
+import { create, list } from "~/server/actions/neighbourhoods";
+import NeighbourhoodForm from "./neighbourhood/neighbourhood-form";
 
-import { useRouter } from "next/navigation";
-import { useState } from "react";
-import { api } from "~/trpc/react";
-
-export function CreatePost() {
-  const router = useRouter();
-  const [name, setName] = useState("");
-
-  const createPost = api.neighbourhood.create.useMutation({
-    onSuccess: () => {
-      router.refresh();
-      setName("");
-    },
-  });
-
+export default async function CreateNeighbourhood() {
+  const neighbourhoods = await list();
   return (
-    <form
-      onSubmit={(e) => {
-        e.preventDefault();
-        createPost.mutate({ name });
-      }}
-      className="flex flex-col gap-2"
-    >
-      <input
-        type="text"
-        placeholder="Title"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-        className="w-full rounded-full px-4 py-2 text-black"
-      />
-      <button
-        type="submit"
-        className="rounded-full bg-white/10 px-10 py-3 font-semibold transition hover:bg-white/20"
-        disabled={createPost.isLoading}
-      >
-        {createPost.isLoading ? "Submitting..." : "Submit"}
-      </button>
-    </form>
+    <>
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+        <Suspense fallback={<p>Loading neighbourhoods...</p>}>
+          {neighbourhoods?.map((neighbourhood) => (
+            <Link
+              key={neighbourhood.id}
+              className="flex max-w-xs flex-col gap-4 rounded-xl bg-cyan-700 p-4 hover:bg-cyan-900"
+              href={`/sims/${neighbourhood.id}`}
+            >
+              <h3 className="text-2xl font-bold text-white">
+                {neighbourhood.name} →
+              </h3>
+              <div className="text-lg text-white">
+                {neighbourhood.description}
+              </div>
+            </Link>
+          ))}
+        </Suspense>
+      </div>
+      <div className="w-full max-w-xs">
+        <NeighbourhoodForm submitAction={create} />
+      </div>
+    </>
   );
 }

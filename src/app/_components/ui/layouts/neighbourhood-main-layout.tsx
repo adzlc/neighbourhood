@@ -1,3 +1,4 @@
+"use server";
 import { get } from "~/server/actions/neighbourhoods";
 import MainLayout from "./main-layout";
 import { Suspense } from "react";

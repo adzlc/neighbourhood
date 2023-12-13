@@ -1,7 +1,11 @@
 import { type Table } from "@tanstack/react-table";
+import { useState } from "react";
+import { Checkbox } from "~/app/_components/ui/checkbox";
 import { Input } from "~/app/_components/ui/input";
 
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
+  const [isDead, setIsDead] = useState<boolean>(false);
+
   return (
     <>
       <div className="flex items-center py-4">
