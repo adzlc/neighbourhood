@@ -17,8 +17,8 @@ export function UserAuthForm({
       <button
         type="button"
         className={cn(buttonVariants({ variant: "outline" }))}
-        onClick={() => {
-          signIn("google");
+        onClick={async () => {
+          await signIn("google");
         }}
         disabled={isLoading || isAuthLoading}
       >
