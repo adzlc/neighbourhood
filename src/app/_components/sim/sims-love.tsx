@@ -131,7 +131,7 @@ const SimsLoveForm = ({ partners }: { partners?: Sim[] }) => {
             name="turnOn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Turn on</FormLabel>
+                <FormLabel>First Turn on</FormLabel>
                 <FormControl>
                   <Input placeholder="Choose a turn on" {...field} />
                 </FormControl>
@@ -144,7 +144,7 @@ const SimsLoveForm = ({ partners }: { partners?: Sim[] }) => {
             name="secondTurnOn"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Turn on 2</FormLabel>
+                <FormLabel>Second Turn on</FormLabel>
                 <FormControl>
                   <Input placeholder="Choose a second turn on" {...field} />
                 </FormControl>

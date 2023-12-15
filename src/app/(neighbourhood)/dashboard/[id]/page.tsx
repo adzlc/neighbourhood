@@ -1,4 +1,3 @@
-
 import DashboardEyeColour from "~/app/_components/dashboard/eye-colour-dash";
 import DashboardHairColour from "~/app/_components/dashboard/hair-colour-dash";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
@@ -12,6 +11,8 @@ import DashboardCareer from "~/app/_components/dashboard/career-dash";
 import DashboardZodiac from "~/app/_components/dashboard/zodiac-dash";
 import { Card } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
+import { getCurrentUser } from "~/server/session";
+import { notFound } from "next/navigation";
 interface PageProps {
   params: {
     id: string;
@@ -19,6 +20,10 @@ interface PageProps {
 }
 
 const DashboardsPage = async ({ params }: PageProps) => {
+  const user = await getCurrentUser();
+  if (!user) {
+    notFound();
+  }
   const neighbourhoodId = params.id;
 
   return (

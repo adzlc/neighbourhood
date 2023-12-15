@@ -3,6 +3,7 @@ import { revalidatePath } from "next/cache";
 import { type SimFormValues, type Sim } from "~/data/sim-typings";
 import { db } from "~/server/db";
 import { getServerAuthSession } from "../auth";
+import { get as getNeighbourhood } from "./neighbourhoods";
 
 /**
  * List all sims for a Neighbourhood.
@@ -128,12 +129,43 @@ export async function deleteSim(id: string) {
   }
 }
 
+export async function batchCreate(neighbourhoodId: string, sims: Sim[]) {
+  try {
+    const session = await getServerAuthSession();
+    // Check the user owns the neighbourhood.
+    const neighbourhood = await getNeighbourhood(neighbourhoodId);
+    if (session && neighbourhood) {
+      let count = 0;
+      for (const sim of sims) {
+        // Skip header row.
+        if (count == 0) {
+          continue;
+        }
+        count++;
+        sim.neighbourhoodId = neighbourhoodId;
+        sim.createdById = session?.user?.id;
+        if (sim.race == undefined) {
+          sim.race = 'Human';
+        }
+        await db.sim.create({
+          data: sim,
+        });
+      }
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 export async function createSim(neighbourhoodId: string, sim: Sim) {
   try {
     const session = await getServerAuthSession();
-    if (session) {
+    // Check the user owns the neighbourhood.
+    const neighbourhood = await getNeighbourhood(neighbourhoodId);
+    if (session && neighbourhood) {
       sim.neighbourhoodId = neighbourhoodId;
       sim.createdById = session?.user?.id;
+
       console.log("Sim being created", sim);
       const response = await db.sim.create({
         data: sim,

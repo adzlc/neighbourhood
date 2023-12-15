@@ -30,6 +30,7 @@ export function DataTableRowActions<TData>({
 }: DataTableRowActionsProps<TData>) {
   const sim = row.original;
   const [open, setOpen] = useState(false);
+  const [openDelete, setDeleteOpen] = useState(false);
   const [correctSimName, setCorrectSimName] = useState(false);
   return (
     <>
@@ -57,14 +58,14 @@ export function DataTableRowActions<TData>({
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              setOpen(true);
+              setDeleteOpen(true);
             }}
           >
             Delete
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-      <Dialog open={open} onOpenChange={setOpen}>
+      <Dialog open={openDelete} onOpenChange={setDeleteOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>
@@ -103,7 +104,7 @@ export function DataTableRowActions<TData>({
                   disabled={!correctSimName}
                   onClick={() => {
                     table.options.meta?.handleDeleteSim(sim.id);
-                    setOpen(false);
+                    setDeleteOpen(false);
                   }}
                 >
                   Delete Sim

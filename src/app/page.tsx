@@ -1,11 +1,11 @@
 "server only";
 import Image from "next/image";
-import { getServerAuthSession } from "~/server/auth";
 import { UserAuthForm } from "./_components/user-login";
 import CreateNeighbourhood from "./_components/create-neighbourhood";
+import { getCurrentUser } from "~/server/session";
 
 export default async function Home() {
-  const session = await getServerAuthSession();
+  const user = await getCurrentUser();
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center bg-white text-black">
@@ -17,7 +17,7 @@ export default async function Home() {
           height="64"
           className="mr-4"
         />
-        {session == null ? <UserAuthForm/> :  <CreateNeighbourhood/>}
+        {user == null ? <UserAuthForm/> :  <CreateNeighbourhood/>}
       </div>
     </main>
   );

@@ -36,7 +36,6 @@ const SimsBirthForm = () => {
             control={form.control}
             name="gender"
             render={({ field }) => { 
-              console.log(field);
               return (
               <FormItem className="space-y-1">
                 <FormLabel>Gender</FormLabel>

@@ -20,17 +20,7 @@ import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
 import NeighbourhoodDeleteDialog from "./neighbourhood-delete-dialog";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
-import { useState } from "react";
-import { DialogClose } from "@radix-ui/react-dialog";
+
 
 const NeighbourhoodForm = ({
   submitAction,
@@ -67,7 +57,7 @@ const NeighbourhoodForm = ({
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
               <Card>
                 <CardHeader>
-                  <CardTitle>{data ? `Edit ${data.name}` : "New Neighbourhood"}</CardTitle>
+                  <CardTitle>{data ? `Edit ${data.name}` : "Create Neighbourhood"}</CardTitle>
                   { data == null && <CardDescription>Create a new Neighbourhood</CardDescription>}
                 </CardHeader>
                 <CardContent className="grid gap-6">
