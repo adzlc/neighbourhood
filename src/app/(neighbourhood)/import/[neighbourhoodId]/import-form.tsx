@@ -39,11 +39,10 @@ const ImportForm = ({ onSubmit }: { onSubmit: (data: string) => void }) => {
             <br />
             This will upload all of the Sims. This process is <b>not</b>{" "}
             idempotent.
-            <p>
+            <br/>
               The csv columns must be: gender, firstName, lastName, lifestage,
               aspiration, secondAspiration, career, Hobby, subHobby, Zodiac,
               orientation, hairColour, eyeColour, lifetimeWish, notes
-            </p>
           </CardDescription>
         </CardHeader>
         <CardContent className="grid gap-6">
