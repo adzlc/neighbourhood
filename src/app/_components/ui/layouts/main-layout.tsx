@@ -21,7 +21,7 @@ export default async function MainLayout({
             <MainNav neighbourhood={neighbourhood} className="mx-6" />
           </div>
           <div className="ml-auto flex w-full space-x-2 sm:justify-end">
-            <h1 className="text-2xl font-bold">
+            <h1 className="text-2xl font-bold text-sims">
               {neighbourhood ? neighbourhood?.name : "Neighbourhoods"}
             </h1>
             <div>
