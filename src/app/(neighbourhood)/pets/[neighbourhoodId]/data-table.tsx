@@ -57,6 +57,12 @@ export function DataTable<TData, TValue>({
       sorting,
       columnFilters,
     },
+    initialState: {
+      columnVisibility: {
+        'gender': false,
+        'isDead': false,
+      }
+    },    
     meta: {
       handleEditSim: (id: string) => router.push(`/pets/edit/${id}`),
       handleKillSim: (id: string, kill: boolean) => {
