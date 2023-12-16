@@ -9,6 +9,7 @@ import {
   type Sim,
   SimInput,
   type SimFormValues,
+  Gender,
 } from "~/data/sim-typings";
 import SimsExtraNotesForm from "./sims-extra-notes-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -32,7 +33,7 @@ const SimsForm = ({
     firstName: data?.firstName ?? "",
     lastName: data?.lastName ?? "",
     race: data?.race ?? "Human",
-    gender: data?.gender ?? "Female",
+    gender: data?.gender ?? Gender.Female,
     orientation: data?.orientation ?? "",
     lifestage: data?.lifestage ?? "Baby",
     aspiration: data?.aspiration ?? "",

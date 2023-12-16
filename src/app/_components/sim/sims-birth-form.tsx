@@ -1,4 +1,4 @@
-import { lifeStages, races, type SimFormValues } from "~/data/sim-typings";
+import { Gender, lifeStages, races, type SimFormValues } from "~/data/sim-typings";
 import {
   Card,
   CardContent,
@@ -48,14 +48,14 @@ const SimsBirthForm = () => {
                   <FormItem>
                     <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
                       <FormControl>
-                        <RadioGroupItem value="Female" className="sr-only" />
+                        <RadioGroupItem value={Gender.Female} className="sr-only" />
                       </FormControl>
                       <div className="items-center rounded-md border-2 border-muted p-1 hover:border-accent">
                         <div className="items-center">
                           <FaFemale size={32} />
                         </div>
                         <div className="block w-full p-2 text-center font-normal">
-                          Female
+                        {Gender.Female}
                         </div>
                       </div>
                     </FormLabel>
@@ -63,14 +63,14 @@ const SimsBirthForm = () => {
                   <FormItem>
                     <FormLabel className="[&:has([data-state=checked])>div]:border-primary">
                       <FormControl>
-                        <RadioGroupItem value="Male" className="sr-only" />
+                        <RadioGroupItem value={Gender.Male} className="sr-only" />
                       </FormControl>
                       <div className="items-center rounded-md border-2 border-muted p-1 hover:border-accent">
                         <div className="items-center">
                           <FaMale size={32} />
                         </div>
                         <div className="block w-full p-2 text-center font-normal">
-                          Male
+                        {Gender.Male}
                         </div>
                       </div>
                     </FormLabel>

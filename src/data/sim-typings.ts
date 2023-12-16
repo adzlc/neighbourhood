@@ -12,6 +12,9 @@ export type Pet = PetPrisma;
 export type SimWithSpouse = Prisma.SimGetPayload<{
   include: { spouse: true };
 }>;
+export type SimWithFamily = Prisma.SimGetPayload<{
+  include: { parents: true };
+}>;
 
 export type PetWithOwner = Prisma.PetGetPayload<{
   include: { owner: true };
@@ -69,6 +72,32 @@ export const SimInput = z.object({
 
 export type SimFormValues = z.infer<typeof SimInput>;
 
+export const SimChildInput = z.object({
+  firstName: z.string().min(1, {
+    message: "First name is required.",
+  }),
+  lastName: z.string().min(1, {
+    message: "Last name is required.",
+  }),
+  lifestage: z.string().min(1, {
+    message: "Age is required.",
+  }),
+  gender: z.string().min(1, {
+    message: "Gender is required.",
+  }),
+  race: z.string().min(1, {
+    message: "Race is required.",
+  }),
+  parentId: z.string().optional(),
+  eyeColour: z.string().min(1, {
+    message: "Eye colour is required.",
+  }),
+  hairColour: z.string().min(1, {
+    message: "Hair colour is required.",
+  }),
+});
+export type SimChildFormValues = z.infer<typeof SimChildInput>;
+
 export const PetInput = z.object({
   name: z.string({ required_error: "Name is required" }).min(1, {
     message: "Name is required.",
@@ -86,9 +115,26 @@ export const PetInput = z.object({
 
 export type PetFormValues = z.infer<typeof PetInput>;
 
-export const genders = ["Female", "Male"];
+export enum Gender {
+  Male = "Male",
+  Female = "Female",
+}
+
+export const genders = [Gender.Female, Gender.Male];
 export const orientations = ["Straight", "Gay", "Bisexual"];
-export const maritalStatus = ["Single", "In relationship", "Its complicated", "Engaged", "Married", "Civil Partnership", "Divorced", "Widowed"];
+export const maritalStatus = [
+  "Single",
+  "In relationship",
+  "Its complicated",
+  "Engaged",
+  "Married",
+  "Civil Partnership",
+  "Divorced",
+  "Widowed",
+];
+
+export const birthRaces = ["Human", "Alien", "Plant"];
+
 export const races = [
   "Human",
   "Werewolf",

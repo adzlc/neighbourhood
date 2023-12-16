@@ -64,6 +64,7 @@ export function DataTable<TData, TValue>({
     },
     meta: {
       handleEditSim: (id: string) => router.push(`/sims/edit/${id}`),
+      handleAddChild: (id: string) => router.push(`/sims-children/create/${id}`),
       handleDeleteSim: (id: string) => {
         deleteSim(id);
       },

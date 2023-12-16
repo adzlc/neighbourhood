@@ -7,6 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { genders, maritalStatus } from "~/data/sim-typings";
 
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (
@@ -35,12 +36,11 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
             <SelectItem key="All" value="All">
               All
             </SelectItem>
-            <SelectItem key="Female" value="Female">
-              Female
-            </SelectItem>
-            <SelectItem key="Male" value="Male">
-              Male
-            </SelectItem>
+            {genders?.map((gender) => (
+                      <SelectItem key={gender} value={gender}>
+                        {gender}
+                      </SelectItem>
+                    ))}
           </SelectContent>
         </Select>
         <Select

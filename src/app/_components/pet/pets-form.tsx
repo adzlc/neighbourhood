@@ -4,6 +4,7 @@ import {
   type Sim,
   PetInput,
   type PetFormValues,
+  Gender,
 } from "~/data/sim-typings";
 import DemoContainer from "../ui/demo-container";
 import { useForm } from "react-hook-form";
@@ -25,7 +26,7 @@ const PetsForm = ({
 }) => {
   const defaultValues: Partial<PetFormValues> = {
     name: data?.name ?? "",
-    gender: data?.gender ?? "Female",
+    gender: data?.gender ?? Gender.Female,
     species: data?.species ?? "Dog",
     career: data?.career ?? undefined,
     ownerId: data?.ownerId ?? undefined,

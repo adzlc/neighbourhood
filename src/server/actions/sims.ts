@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { type SimFormValues, type Sim } from "~/data/sim-typings";
+import { type SimFormValues, Sim, SimWithFamily, SimChildFormValues, Gender } from "~/data/sim-typings";
 import { db } from "~/server/db";
 import { getServerAuthSession } from "../auth";
 import { get as getNeighbourhood } from "./neighbourhoods";
@@ -53,9 +53,9 @@ function getOrientationFilter(sim: Sim | null | undefined) {
   }
   console.log("Making orientation filter ", sim.orientation, sim.gender);
   if ("Straight" === sim.orientation) {
-    return { gender: sim.gender === "Male" ? "Female" : "Male" };
+    return { gender: Gender.Male.toString() === sim.gender ? Gender.Female : Gender.Male };
   } else if ("Gay" === sim.orientation) {
-    return { gender: sim.gender === "Male" ? "Male" : "Female" };
+    return { gender: Gender.Male.toString() === sim.gender ? Gender.Male : Gender.Female };
   } else {
     return null;
   }
@@ -199,6 +199,55 @@ async function editSim(id: string, sim: Sim) {
           createdById: session?.user?.id,
         },
         data: sim,
+      });
+      return { response };
+    }
+  } catch (e) {
+    console.log(e);
+  }
+}
+
+export async function createChildSim(id: string, data: SimChildFormValues) {
+  const secondParent = data.parentId;
+  const childData = {
+    firstName: data.firstName,
+    lastName: data.lastName,
+    race: data.race,
+    lifestage: data.lifestage,
+    gender: data.gender,
+    eyeColour: data.eyeColour,
+    hairColour: data.hairColour
+  } as Sim;
+  const sim = await createChild(id, childData, secondParent);
+  revalidatePath(`/sims/${sim?.response.neighbourhoodId}`);
+}
+
+export async function createChild(parentId: string, sim: Sim, parentId2?: string) {
+  try {
+    const session = await getServerAuthSession();
+    const parent = await db.sim.findUnique({
+      where: {
+        id: parentId,
+        createdById: session?.user?.id,
+      },
+      include: {
+        neighbourhood: true,
+      },
+    });
+    if (session && parent) {
+      sim.neighbourhoodId = parent.neighbourhoodId;
+      sim.createdById = session.user.id;
+      const parentIds = [{id: parentId}];
+      if (parentId2 != undefined) {
+        parentIds.push({id: parentId2})
+      }
+      const response = await db.sim.create({
+        data: {
+          ...sim,
+          parents: {
+            connect: parentIds
+          }
+        }
       });
       return { response };
     }
