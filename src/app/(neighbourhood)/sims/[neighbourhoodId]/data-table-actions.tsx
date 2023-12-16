@@ -92,7 +92,11 @@ export function DataTableRowActions<TData>({
                   onChange={(e) => {
                     const value = e.currentTarget.value;
                     setCorrectSimName(
-                      value === `${sim.firstName} ${sim.lastName}`,
+                      value.localeCompare(
+                        `${sim.firstName} ${sim.lastName}`,
+                        undefined,
+                        { sensitivity: "accent" },
+                      ) === 0,
                     );
                   }}
                 />
@@ -124,10 +128,15 @@ export function DataTableRowActions<TData>({
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle>
-            {`${sim.isDead ? "Resurrect" : "Kill"}`} {sim.firstName} {sim.lastName}
+              {`${sim.isDead ? "Resurrect" : "Kill"}`} {sim.firstName}{" "}
+              {sim.lastName}
             </DialogTitle>
             <DialogDescription>
-              To {`${sim.isDead ? "resurrect" : "kill"}`} the Sim, please enter <b>{sim.firstName} {sim.lastName}</b> below.
+              To {`${sim.isDead ? "resurrect" : "kill"}`} the Sim, please enter{" "}
+              <b>
+                {sim.firstName} {sim.lastName}
+              </b>{" "}
+              below.
             </DialogDescription>
           </DialogHeader>
 
@@ -142,7 +151,11 @@ export function DataTableRowActions<TData>({
                   onChange={(e) => {
                     const value = e.currentTarget.value;
                     setCorrectSimName(
-                      value === `${sim.firstName} ${sim.lastName}`,
+                      value.localeCompare(
+                        `${sim.firstName} ${sim.lastName}`,
+                        undefined,
+                        { sensitivity: "accent" },
+                      ) === 0,
                     );
                   }}
                 />

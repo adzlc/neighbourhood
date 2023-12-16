@@ -49,7 +49,7 @@ const NeighbourhoodDeleteDialog = ({
                   className="w-60"
                   onChange={(e) => {
                     const value = e.currentTarget.value;
-                    setCorrectName(value === neighbourhood.name);
+                    setCorrectName(value.localeCompare(neighbourhood.name, undefined, { sensitivity: 'accent' }) === 0);
                   }}
                 />
               </div>

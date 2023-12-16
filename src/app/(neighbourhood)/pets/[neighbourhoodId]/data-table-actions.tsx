@@ -62,7 +62,8 @@ export function DataTableRowActions<TData>({
           <DialogHeader>
             <DialogTitle>Delete {pet.name}</DialogTitle>
             <DialogDescription>
-              Deleting a Pet cannot be undone. To delete please enter <b>{pet.name}</b> below.
+              Deleting a Pet cannot be undone. To delete please enter{" "}
+              <b>{pet.name}</b> below.
             </DialogDescription>
           </DialogHeader>
 
@@ -76,9 +77,7 @@ export function DataTableRowActions<TData>({
                   className="w-60"
                   onChange={(e) => {
                     const value = e.currentTarget.value;
-                    setCorrectName(
-                      value === `${pet.name}`,
-                    );
+                    setCorrectName(value.localeCompare(pet.name, undefined, { sensitivity: 'accent' }) === 0);
                   }}
                 />
               </div>
