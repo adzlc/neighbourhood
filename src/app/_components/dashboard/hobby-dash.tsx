@@ -1,10 +1,11 @@
-import { getHobbyData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getHobbyData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardHobby = async ({ id }: { id: string }) => {
-  const data = await getHobbyData(id);
+const DashboardHobby = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getHobbyData(sims);
 
   return (
     <>

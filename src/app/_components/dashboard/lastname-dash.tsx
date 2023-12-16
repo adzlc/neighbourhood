@@ -1,10 +1,11 @@
-import { getLastnameData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getLastnameData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardLastname = async ({ id }: { id: string }) => {
-  const data = await getLastnameData(id);
+const DashboardLastname = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getLastnameData(sims);
 
   return (
     <>

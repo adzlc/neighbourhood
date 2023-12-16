@@ -1,10 +1,11 @@
-import { getEyeColourData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getEyeColourData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardEyeColour = async ({ id }: { id: string }) => {
-  const data = await getEyeColourData(id);
+const DashboardEyeColour = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getEyeColourData(sims);
 
   return (
     <>

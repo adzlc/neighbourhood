@@ -1,10 +1,11 @@
-import { getAgeData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getAgeData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardAge = async ({ id }: { id: string }) => {
-  const data = await getAgeData(id);
+const DashboardAge = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getAgeData(sims);
 
   return (
     <>

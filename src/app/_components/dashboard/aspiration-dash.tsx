@@ -1,10 +1,11 @@
-import { getAspirationData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getAspirationData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardAspiration = async ({ id }: { id: string }) => {
-  const data = await getAspirationData(id);
+const DashboardAspiration = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getAspirationData(sims);
 
   return (
     <>

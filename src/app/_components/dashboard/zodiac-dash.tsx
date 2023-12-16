@@ -1,10 +1,11 @@
-import { getZodiacData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getZodiacData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardZodiac = async ({ id }: { id: string }) => {
-  const data = await getZodiacData(id);
+const DashboardZodiac = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getZodiacData(sims);
 
   return (
     <>

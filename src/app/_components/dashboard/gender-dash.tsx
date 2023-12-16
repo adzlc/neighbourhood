@@ -1,10 +1,11 @@
-import { getGenderData } from "~/server/actions/dashboards";
+import { type Sim } from "~/data/sim-typings";
+import { getGenderData } from "~/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
 
-const DashboardGender = async ({ id }: { id: string }) => {
-  const data = await getGenderData(id);
+const DashboardGender = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getGenderData(sims);
 
   return (
     <>

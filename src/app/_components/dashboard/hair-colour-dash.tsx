@@ -1,10 +1,12 @@
-import { getHairColourData } from "~/server/actions/dashboards";
+
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
+import { type Sim } from "~/data/sim-typings";
+import { getHairColourData } from "~/lib/dashboard";
 
-const DashboardHairColour = async ({ id }: { id: string }) => {
-  const data = await getHairColourData(id);
+const DashboardHairColour = async ({ sims }: { sims: Sim[] }) => {
+  const data = await getHairColourData(sims);
 
   return (
     <>

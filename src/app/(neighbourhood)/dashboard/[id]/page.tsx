@@ -13,6 +13,7 @@ import { Card } from "@/components/ui/card";
 import { CardContent } from "@/components/ui/card";
 import { getCurrentUser } from "~/server/session";
 import { notFound } from "next/navigation";
+import { getDashboardData } from "~/server/actions/dashboards";
 interface PageProps {
   params: {
     id: string;
@@ -25,6 +26,7 @@ const DashboardsPage = async ({ params }: PageProps) => {
     notFound();
   }
   const neighbourhoodId = params.id;
+  const data = await getDashboardData(neighbourhoodId);
 
   return (
     <>
@@ -49,70 +51,70 @@ const DashboardsPage = async ({ params }: PageProps) => {
           <TabsContent value="haircolour" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardHairColour id={neighbourhoodId} />
+                <DashboardHairColour sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="eyecolour" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardEyeColour id={neighbourhoodId} />
+                <DashboardEyeColour sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="gender" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardGender id={neighbourhoodId} />
+                <DashboardGender sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="orientation" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardOrientation id={neighbourhoodId} />
+                <DashboardOrientation sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="age" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardAge id={neighbourhoodId} />
+                <DashboardAge sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="lastName" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardLastname id={neighbourhoodId} />
+                <DashboardLastname sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="hobby" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardHobby id={neighbourhoodId} />
+                <DashboardHobby sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="aspiration" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardAspiration id={neighbourhoodId} />
+                <DashboardAspiration sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="zodiac" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardZodiac id={neighbourhoodId} />
+                <DashboardZodiac sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
           <TabsContent value="career" className="h-96">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
-                <DashboardCareer id={neighbourhoodId} />
+                <DashboardCareer sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
