@@ -1,5 +1,5 @@
 "use client";
-import { type Column, type ColumnDef } from "@tanstack/react-table";
+import { FilterFn, type Column, type ColumnDef } from "@tanstack/react-table";
 import { DataTableRowActions } from "./data-table-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
@@ -17,6 +17,15 @@ const sortFunction = (name: string, column: Column<Sim>) => {
   );
 };
 
+const isDeadFilterFn : FilterFn<Sim> = (row, columnId, value, addMeta) => {
+  // Automatically show all values if filter is unset.
+  if (value === undefined || value === null || (typeof value === 'string' && value.length === 0)) {
+    return true;
+  } else {
+    return row.original.isDead == value;
+  }
+};
+
 export const columns: ColumnDef<Sim>[] = [
   {
     id: "actions",
@@ -29,6 +38,16 @@ export const columns: ColumnDef<Sim>[] = [
   {
     accessorKey: "firstName",
     header: ({ column }) => sortFunction('First Name', column),
+  },
+  {
+    accessorKey: "gender",
+    header: ({ column }) => sortFunction('Gender', column),
+    filterFn: "equals"
+  },
+  {
+    accessorKey: "isDead",
+    header: ({ column }) => sortFunction('Is dead', column),
+    filterFn: isDeadFilterFn
   },
   {
     accessorKey: "race",
