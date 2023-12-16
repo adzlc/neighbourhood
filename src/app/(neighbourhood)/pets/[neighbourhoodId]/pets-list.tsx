@@ -10,9 +10,9 @@ const PetsList = ({ data }: { data: PetWithOwner[] }) => {
     await deletePet(id);
     revalidatePath("/");
   }
-  async function killSimAction(id: string, kill: boolean, reason: string | undefined) {
+  async function killSimAction(id: string, kill: boolean) {
     "use server";
-    await killPet(id, kill, reason);
+    await killPet(id, kill);
     revalidatePath("/");
   }
 

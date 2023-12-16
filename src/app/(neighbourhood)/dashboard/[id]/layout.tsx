@@ -1,4 +1,4 @@
-import NeighbourhoodMainLayout from "~/app/_components/ui/layouts/neighbourhood-main-layout";
+import NeighbourhoodMainLayout from "~/app/_components/layouts/neighbourhood-main-layout";
 
 export const metadata = {
   title: "Neighbourhoods - Dashboards",

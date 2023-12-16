@@ -1,5 +1,5 @@
 import { type Sim } from "~/data/sim-typings";
-import { getEyeColourData } from "~/lib/dashboard";
+import { getEyeColourData } from "~/app/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";

@@ -31,7 +31,7 @@ interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   deleteSim: (id: string) => void;
-  killSim: (id: string, kill: boolean, reason: string | undefined) => void;
+  killSim: (id: string, kill: boolean) => void;
 }
 
 export function DataTable<TData, TValue>({

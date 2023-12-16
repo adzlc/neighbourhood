@@ -1,8 +1,8 @@
 import { Separator } from "@/components/ui/separator";
 import { Tabs } from "@/components/ui/tabs";
-import { MainNav } from "~/app/_components/ui/layouts/main-nav";
+import { MainNav } from "~/app/_components/layouts/main-nav";
 import { type Neighbourhood } from "~/data/sim-typings";
-import { UserAccountNav } from "../../user-account-nav";
+import { UserAccountNav } from "../user-account-nav";
 import { getServerAuthSession } from "~/server/auth";
 
 export default async function MainLayout({

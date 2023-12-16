@@ -11,7 +11,6 @@ import {
   type SimFormValues,
 } from "~/data/sim-typings";
 import SimsExtraNotesForm from "./sims-extra-notes-form";
-import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { Form } from "../ui/form";

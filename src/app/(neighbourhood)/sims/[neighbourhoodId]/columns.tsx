@@ -1,5 +1,5 @@
 "use client";
-import { FilterFn, type Column, type ColumnDef } from "@tanstack/react-table";
+import { type FilterFn, type Column, type ColumnDef } from "@tanstack/react-table";
 import { DataTableRowActions } from "./data-table-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";

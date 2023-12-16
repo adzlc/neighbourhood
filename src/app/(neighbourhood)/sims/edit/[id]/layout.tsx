@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import MainLayout from "~/app/_components/ui/layouts/main-layout";
+import MainLayout from "~/app/_components/layouts/main-layout";
 import { Skeleton } from "~/app/_components/ui/skeleton";
 import { get } from "~/server/actions/sims";
 

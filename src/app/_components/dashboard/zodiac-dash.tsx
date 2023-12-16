@@ -1,5 +1,5 @@
 import { type Sim } from "~/data/sim-typings";
-import { getZodiacData } from "~/lib/dashboard";
+import { getZodiacData } from "~/app/lib/dashboard";
 import DashboardPieChart from "./dashboard-piechart";
 import { Suspense } from "react";
 import { Skeleton } from "../ui/skeleton";
