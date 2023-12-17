@@ -1,5 +1,4 @@
 import SimsList from "./sims-list";
-import { list } from "~/server/actions/sims";
 import { Suspense } from 'react';
 import { getCurrentUser } from "~/server/session";
 import { notFound } from "next/navigation";
@@ -16,12 +15,11 @@ const SimsPage = async ({ params }: PageProps) => {
     notFound();
   }
   const neighbourhoodId = params.neighbourhoodId;
-  const sims = await list(neighbourhoodId);
 
   return (
     <>
-      <Suspense fallback={<p>Loading sims...</p>}>
-        {sims && <SimsList data={sims} />}
+      <Suspense fallback={"Loading data..."}>
+        <SimsList neighbourhoodId={neighbourhoodId} />
       </Suspense>
     </>
   );

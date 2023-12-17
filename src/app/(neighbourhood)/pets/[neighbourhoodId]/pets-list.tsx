@@ -1,10 +1,11 @@
 import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { revalidatePath } from "next/cache";
-import { type PetWithOwner } from "~/data/sim-typings";
-import { deletePet, killPet } from "~/server/actions/pets";
+import { deletePet, killPet, list } from "~/server/actions/pets";
 
-const PetsList = ({ data }: { data: PetWithOwner[] }) => {
+const PetsList = async ({ neighbourhoodId }: { neighbourhoodId: string }) => {
+  const data = await list(neighbourhoodId);
+
   async function deletePetAction(id: string) {
     "use server";
     await deletePet(id);
@@ -16,12 +17,18 @@ const PetsList = ({ data }: { data: PetWithOwner[] }) => {
     revalidatePath("/");
   }
 
-
   return (
     <>
-      <div className="mb-6">
-        <DataTable columns={columns} data={data} deleteSim={deletePetAction} killSim={killSimAction}/>
-      </div>
+      {data && (
+        <div className="mb-6">
+          <DataTable
+            columns={columns}
+            data={data}
+            deleteSim={deletePetAction}
+            killSim={killSimAction}
+          />
+        </div>
+      )}
     </>
   );
 };

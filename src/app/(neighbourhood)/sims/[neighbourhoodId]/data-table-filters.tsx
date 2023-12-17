@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { genders } from "~/data/sim-typings";
+import { aspirations, genders, lifeStages } from "~/data/sim-typings";
 
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (
@@ -33,26 +33,50 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
           }
           className="ml-1 w-40"
         />
-        <Input
-          placeholder="Filter age..."
-          value={
-            (table.getColumn("lifestage")?.getFilterValue() as string) ?? ""
+        <Select
+          onValueChange={(value) =>
+            table
+              .getColumn("lifestage")
+              ?.setFilterValue(value == "All" ? "" : value)
           }
-          onChange={(event) =>
-            table.getColumn("lifestage")?.setFilterValue(event.target.value)
+          value={(table.getColumn("lifestage")?.getFilterValue() as string) ?? ""}
+        >
+          <SelectTrigger className="ml-1 w-40">
+            <SelectValue placeholder="Filter age..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key="All" value="All">
+              All
+            </SelectItem>
+            {lifeStages?.map((lifestage) => (
+              <SelectItem key={lifestage} value={lifestage}>
+                {lifestage}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>        
+        <Select
+          onValueChange={(value) =>
+            table
+              .getColumn("aspiration")
+              ?.setFilterValue(value == "All" ? "" : value)
           }
-          className="ml-1 w-40"
-        />
-        <Input
-          placeholder="Filter aspiration..."
-          value={
-            (table.getColumn("aspiration")?.getFilterValue() as string) ?? ""
-          }
-          onChange={(event) =>
-            table.getColumn("aspiration")?.setFilterValue(event.target.value)
-          }
-          className="ml-1 w-40"
-        />
+          value={(table.getColumn("aspiration")?.getFilterValue() as string) ?? ""}
+        >
+          <SelectTrigger className="ml-1 w-40">
+            <SelectValue placeholder="Filter aspiration..." />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem key="All" value="All">
+              All
+            </SelectItem>
+            {aspirations?.map((aspiration) => (
+              <SelectItem key={aspiration} value={aspiration}>
+                {aspiration}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
         <Select
           onValueChange={(value) =>
             table

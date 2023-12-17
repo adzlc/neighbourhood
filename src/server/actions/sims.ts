@@ -1,6 +1,6 @@
 "use server";
 import { revalidatePath } from "next/cache";
-import { type SimFormValues, Sim, SimWithFamily, SimChildFormValues, Gender } from "~/data/sim-typings";
+import { type SimFormValues, type Sim, type SimChildFormValues, Gender } from "~/data/sim-typings";
 import { db } from "~/server/db";
 import { getServerAuthSession } from "../auth";
 import { get as getNeighbourhood } from "./neighbourhoods";
@@ -11,6 +11,7 @@ import { get as getNeighbourhood } from "./neighbourhoods";
  * @returns Array of Sim.
  */
 export async function list(neighbourhoodId: string) {
+  // await new Promise(f => setTimeout(f, 1000));
   const session = await getServerAuthSession();
   if (session) {
     return await db.sim.findMany({
