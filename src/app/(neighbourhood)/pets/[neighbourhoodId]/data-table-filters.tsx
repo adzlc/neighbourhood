@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { genders, maritalStatus } from "~/data/sim-typings";
+import { genders } from "~/data/sim-typings";
 
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (

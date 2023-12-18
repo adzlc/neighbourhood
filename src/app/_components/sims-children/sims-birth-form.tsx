@@ -1,8 +1,6 @@
 import {
   Gender,
-  genders,
   birthRaces as races,
-  Sim,
   type SimFormValues,
 } from "~/data/sim-typings";
 import {

@@ -6,7 +6,7 @@ import {
   CardTitle,
   CardDescription,
 } from "@/components/ui/card";
-import { type PetFormValues, petcareers, type Sim, Gender, genders } from "~/data/sim-typings";
+import { type PetFormValues, petcareers, type Sim, Gender } from "~/data/sim-typings";
 import { FormControl, FormField, FormItem, FormLabel } from "../ui/form";
 import { useFormContext } from "react-hook-form";
 import { FormMessage } from "../ui/form";

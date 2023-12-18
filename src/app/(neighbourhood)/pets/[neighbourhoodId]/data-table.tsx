@@ -108,6 +108,7 @@ export function DataTable<TData, TValue>({
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
+                  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   style={table.options.meta?.getRowStyles(row)}
                 >
                   {row.getVisibleCells().map((cell) => (

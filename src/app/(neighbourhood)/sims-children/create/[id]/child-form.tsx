@@ -16,7 +16,6 @@ const ChildSimForm = ({
   const router = useRouter();
 
   async function createSim(data: SimChildFormValues) {
-    console.log("booo", data)
     await createChildFunction(data);
     router.push(`/sims/${sim.neighbourhoodId}`);
   }

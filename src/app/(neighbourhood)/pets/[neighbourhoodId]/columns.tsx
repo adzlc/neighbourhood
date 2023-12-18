@@ -17,7 +17,7 @@ const sortFunction = (name: string, column: Column<PetWithOwner>) => {
   );
 };
 
-const isDeadFilterFn : FilterFn<PetWithOwner> = (row, columnId, value, addMeta) => {
+const isDeadFilterFn : FilterFn<PetWithOwner> = (row, columnId, value) => {
   // Automatically show all values if filter is unset.
   if (value === undefined || value === null || (typeof value === 'string' && value.length === 0)) {
     return true;
