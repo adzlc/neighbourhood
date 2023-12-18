@@ -66,7 +66,7 @@ export function DataTable<TData, TValue>({
     meta: {
       handleEditSim: (id: string) => router.push(`/pets/edit/${id}`),
       handleKillSim: (id: string, kill: boolean) => {
-        killSim(id, kill, undefined);
+        killSim(id, kill);
       },
       handleDeleteSim: (id: string) => {
         deleteSim(id);

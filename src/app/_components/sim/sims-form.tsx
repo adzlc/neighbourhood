@@ -2,7 +2,7 @@
 import DemoContainer from "../ui/demo-container";
 import SimsBirthForm from "./sims-birth-form";
 import SimsPersonalityForm from "./sims-personality-form";
-import SimsFeaturesForm from "./features-form";
+import SimsFeaturesForm from "./sims-features-form"; 
 import SimsLoveForm from "./sims-love";
 import {
   type SimWithSpouse,
@@ -21,14 +21,25 @@ const SimsForm = ({
   data,
   neighbourhoodId,
   partners,
+  parents,
   children,
 }: {
   submitAction: (data: SimFormValues) => Promise<void>;
   data?: SimWithSpouse | null | undefined;
   partners?: Sim[];
+  parents?: Sim[];
   neighbourhoodId: string;
   children?: React.ReactNode;
 }) => {
+  
+  const simParents = data?.parents;
+  let simParent1, simParent2;
+  if (simParents != undefined && simParents?.length > 0) {
+    simParent1 = simParents[0]?.id;
+    if (simParents.length > 1) {
+      simParent2 = simParents[1]?.id;
+    }
+  }
   const defaultValues: Partial<SimFormValues> = {
     firstName: data?.firstName ?? "",
     lastName: data?.lastName ?? "",
@@ -51,6 +62,8 @@ const SimsForm = ({
     neighbourhoodId: neighbourhoodId,
     eyeColour: data?.eyeColour ?? "Brown",
     hairColour: data?.hairColour ?? "Blonde",
+    parentId: simParent1 ?? "",
+    parent2Id: simParent2 ?? ""
   };
 
   const form = useForm<SimFormValues>({
@@ -76,7 +89,7 @@ const SimsForm = ({
             </div>
             <div className="col-span-2 grid items-start gap-6 lg:col-span-2">
               <DemoContainer>
-                <SimsFeaturesForm />
+                <SimsFeaturesForm parents={parents}/>
               </DemoContainer>
             </div>
             <div className="col-span-2 grid items-start gap-6 lg:col-span-2">

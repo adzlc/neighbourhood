@@ -1,4 +1,4 @@
-import { createChildSim, get, listPartners } from "~/server/actions/sims";
+import { createChildSim, get, listParents } from "~/server/actions/sims";
 import { type SimChildFormValues } from "~/data/sim-typings";
 import ChildSimForm from "./child-form";
 
@@ -17,7 +17,7 @@ const SimsPage = async ({ params }: PageProps) => {
     console.log("hello", simId, data)
     await createChildSim(simId, data);
   }
-  const parents = await listPartners(sim?.neighbourhoodId, sim)
+  const parents = await listParents(sim?.neighbourhoodId, simId)
 
   return (
     <>

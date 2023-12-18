@@ -19,10 +19,11 @@ import {
   eyecolours,
   haircolours,
   zodiacs,
+  type Sim,
 } from "~/data/sim-typings";
 import { useFormContext } from "react-hook-form";
 
-const SimsFeaturesForm = () => {
+const SimsFeaturesForm = ({ parents }: { parents?: Sim[] }) => {
   const form = useFormContext<SimFormValues>();
 
   return (
@@ -109,6 +110,64 @@ const SimsFeaturesForm = () => {
                     {eyecolours?.map((eyeColour) => (
                       <SelectItem key={eyeColour} value={eyeColour}>
                         {eyeColour}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="parentId"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>First Parent</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a parent" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {parents?.map((parent) => (
+                      <SelectItem key={parent.id} value={parent.id}>
+                        {parent.firstName} {parent.lastName}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="parent2Id"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Second Parent</FormLabel>
+                <Select
+                  onValueChange={field.onChange}
+                  defaultValue={field.value}
+                >
+                  <FormControl>
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choose a parent" />
+                    </SelectTrigger>
+                  </FormControl>
+                  <SelectContent>
+                    <SelectItem key="notset" value="notset">
+                      {"Not set"}
+                    </SelectItem>
+                    {parents?.map((parent) => (
+                      <SelectItem key={parent.id} value={parent.id}>
+                        {parent.firstName} {parent.lastName}
                       </SelectItem>
                     ))}
                   </SelectContent>

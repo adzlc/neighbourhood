@@ -10,7 +10,7 @@ export type Sim = SimPrisma;
 export type Neighbourhood = NeighbourhoodPrisma;
 export type Pet = PetPrisma;
 export type SimWithSpouse = Prisma.SimGetPayload<{
-  include: { spouse: true };
+  include: { spouse: true, parents: true };
 }>;
 export type SimWithFamily = Prisma.SimGetPayload<{
   include: { parents: true };
@@ -67,7 +67,9 @@ export const SimInput = z.object({
   }),
   hairColour: z.string().min(1, {
     message: "Hair colour is required.",
-  }),
+  }),  
+  parentId: z.string().optional(),
+  parent2Id: z.string().optional(),
 });
 
 export type SimFormValues = z.infer<typeof SimInput>;

@@ -6,10 +6,12 @@ import { type SimWithSpouse, type Sim, type SimFormValues } from "~/data/sim-typ
 const EditSim = ({
   data,
   partners,
+  parents,
   editFunction,
 }: {
   data: SimWithSpouse;
-  partners: Sim[]
+  partners: Sim[];
+  parents: Sim[];
   editFunction: (data: SimFormValues) => Promise<void>;
 }) => {
   const sim = data;
@@ -28,6 +30,7 @@ const EditSim = ({
             data={sim}
             neighbourhoodId={sim.neighbourhoodId}
             partners={partners}
+            parents={parents}
             submitAction={editSim}
           />
         </>

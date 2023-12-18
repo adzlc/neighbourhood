@@ -19,7 +19,6 @@ import { MoreHorizontal } from "lucide-react";
 import { useState } from "react";
 import { Input } from "~/app/_components/ui/input";
 import { type Sim } from "~/data/sim-typings";
-import { redirect } from "next/navigation";
 
 interface DataTableRowActionsProps<TData> {
   row: Row<Sim>;
@@ -42,7 +41,7 @@ export function DataTableRowActions<TData>({
             <MoreHorizontal className="h-4 w-4" />
           </Button>
         </DropdownMenuTrigger>
-        
+
         <DropdownMenuContent align="end">
           <DropdownMenuItem
             onClick={() => {
@@ -67,7 +66,9 @@ export function DataTableRowActions<TData>({
           </DropdownMenuItem>
           <DropdownMenuItem
             onClick={() => {
-              table.options.meta?.handleAddChild(sim.id);
+              if (table.options.meta?.handleAddChild) {
+                table.options.meta.handleAddChild(sim.id);
+              }
             }}
           >
             Woohoo

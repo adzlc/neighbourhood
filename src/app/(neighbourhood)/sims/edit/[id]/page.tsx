@@ -1,4 +1,4 @@
-import { edit, get, listPartners } from "~/server/actions/sims";
+import { edit, get, listPartners, listParents } from "~/server/actions/sims";
 import EditSim from "./edit-form";
 import { type SimFormValues } from "~/data/sim-typings";
 
@@ -17,15 +17,16 @@ const SimsPage = async ({ params }: PageProps) => {
     await edit(simId, data);
   }
   const partners = await listPartners(sim?.neighbourhoodId, sim)
+  const parents = await listParents(sim?.neighbourhoodId, sim?.id)
 
   return (
     <>
-      {sim && (
+      {sim && partners && parents &&  (
         <>
           <h2 className="text-2xl font-bold text-black dark:text-white">
             Edit {sim.firstName} {sim.lastName}
           </h2>
-          <EditSim data={sim} editFunction={editSim} partners={partners} />
+          <EditSim data={sim} editFunction={editSim} partners={partners} parents={parents} />
         </>
       )}
     </>

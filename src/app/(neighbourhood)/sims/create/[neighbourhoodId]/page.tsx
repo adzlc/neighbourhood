@@ -1,4 +1,4 @@
-import { create, listPartners } from "~/server/actions/sims";
+import { create, listPartners, listParents } from "~/server/actions/sims";
 import { redirect } from "next/navigation";
 import SimsForm from "~/app/_components/sim/sims-form";
 import { type SimFormValues } from "~/data/sim-typings";
@@ -18,13 +18,14 @@ const SimsPage = async ({ params }: PageProps) => {
     redirect(`/sims/${neighbourhoodId}`);
   }
   const partners = await listPartners(neighbourhoodId, null)
+  const parents = await listParents(neighbourhoodId)
 
 
   return (
     <>
       <h1 className="text-2xl font-bold">Create a Sim</h1>
       <div>
-        <SimsForm neighbourhoodId={neighbourhoodId} partners={partners} submitAction={createSim}/>
+        <SimsForm neighbourhoodId={neighbourhoodId} partners={partners} parents={parents} submitAction={createSim}/>
       </div>
     </>
   );
