@@ -7,7 +7,7 @@ export default async function CreateNeighbourhood() {
   const neighbourhoods = await list();
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-8">
         <Suspense fallback={<p>Loading neighbourhoods...</p>}>
           {neighbourhoods?.map((neighbourhood) => (
             <Link

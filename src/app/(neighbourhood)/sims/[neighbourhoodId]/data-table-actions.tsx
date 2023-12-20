@@ -76,7 +76,7 @@ export function DataTableRowActions<TData>({
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={openDelete} onOpenChange={setDeleteOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="md:max-w-md">
           <DialogHeader>
             <DialogTitle>
               Delete {sim.firstName} {sim.lastName}
@@ -91,7 +91,7 @@ export function DataTableRowActions<TData>({
             </DialogDescription>
           </DialogHeader>
 
-          <DialogFooter className="sm:justify-start">
+          <DialogFooter className="md:justify-start">
             <div className="grid gap-4 py-4">
               <div className="items-start">
                 <Input
@@ -135,7 +135,7 @@ export function DataTableRowActions<TData>({
         </DialogContent>
       </Dialog>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="md:max-w-md">
           <DialogHeader>
             <DialogTitle>
               {`${sim.isDead ? "Resurrect" : "Kill"}`} {sim.firstName}{" "}
@@ -150,7 +150,7 @@ export function DataTableRowActions<TData>({
             </DialogDescription>
           </DialogHeader>
 
-          <DialogFooter className="sm:justify-start">
+          <DialogFooter className="md:justify-start">
             <div className="grid gap-4 py-4">
               <div className="items-start">
                 <Input

@@ -30,8 +30,8 @@ const DashboardsPage = async ({ params }: PageProps) => {
 
   return (
     <>
-      <div className="flex-1 space-y-4 p-8 pt-6">
-        <Tabs defaultValue="lastName" className="w-full">
+      <div className="flex-1 space-y-4 md:p-8 md:pt-6">
+        <Tabs defaultValue="lastName" className="w-full overflow-auto">
           <TabsList className="grid w-full grid-cols-4 ">
             <TabsTrigger value="lastName">Last Name</TabsTrigger>
             <TabsTrigger value="age">Age</TabsTrigger>
@@ -48,21 +48,21 @@ const DashboardsPage = async ({ params }: PageProps) => {
             <TabsTrigger value="career">Career</TabsTrigger>
             <TabsTrigger value="zodiac">Zodiac</TabsTrigger>
           </TabsList>
-          <TabsContent value="haircolour" className="h-96">
+          <TabsContent value="haircolour" className="h-96 overflow-auto">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
                 <DashboardHairColour sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="eyecolour" className="h-96">
+          <TabsContent value="eyecolour" className="h-96 overflow-auto">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
                 <DashboardEyeColour sims={data} />
               </CardContent>
             </Card>
           </TabsContent>
-          <TabsContent value="gender" className="h-96">
+          <TabsContent value="gender" className="h-96 overflow-auto">
             <Card className="h-full">
               <CardContent className="h-full min-h-fit w-full pl-2">
                 <DashboardGender sims={data} />

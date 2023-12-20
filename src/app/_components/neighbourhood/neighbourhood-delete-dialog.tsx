@@ -32,7 +32,7 @@ const NeighbourhoodDeleteDialog = ({
               <Button variant="destructive">Delete</Button>
             </div>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px]">
+          <DialogContent className="md:max-w-[425px]">
             <DialogHeader>
               <DialogTitle>Delete {neighbourhood.name}</DialogTitle>
               <DialogDescription>

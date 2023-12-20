@@ -21,8 +21,8 @@ export default async function MainLayout({
   return (
     <div className="flex-col md:flex">
       <div className="border-b">
-        <div className="flex h-12 items-center px-4 sm:h-24">
-          <div className="ml-auto flex w-full space-x-2 sm:justify-start">
+        <div className="flex h-12 items-center px-4 md:h-24">
+          <div className="ml-auto flex w-full space-x-2 md:justify-start">
             <MainNav
               neighbourhood={neighbourhood}
               user={user}
@@ -30,7 +30,7 @@ export default async function MainLayout({
             />
           </div>
         </div>
-        <div className="ml-5 border-b sm:hidden">
+        <div className="ml-5 border-b md:hidden">
           <h1 className="text-xl font-bold text-sims">
             {neighbourhood ? neighbourhood?.name : "Neighbourhoods"}
           </h1>
@@ -38,9 +38,9 @@ export default async function MainLayout({
       </div>
       <Separator />
       <Tabs defaultValue="complete" className="flex-1">
-        <div className="mt-2 ml-2 mr-2 sm:ml-5 sm:mr-5 sm:mt-5 h-full sm:ml-10">
+        <div className="mt-2 ml-2 mr-2 md:ml-5 md:mr-5 md:mt-5 h-full md:ml-10">
           <div className="grid h-full items-stretch gap-6 md:grid-cols-[1fr_200px]">
-            <div className="flex-col space-y-4 sm:flex md:order-2">
+            <div className="flex-col space-y-4 md:flex md:order-2">
               {children}
             </div>
           </div>

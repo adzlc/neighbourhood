@@ -54,7 +54,7 @@ export function MainNav({
           className="mr-4 cursor-pointer md:hidden"
         />
       </Link>
-      <nav className="hidden gap-6 sm:justify-start  sm:flex">
+      <nav className="hidden gap-6 md:justify-start  md:flex">
         <NavigationMenu>
           <NavigationMenuList>
             {neighbourhood && (
@@ -185,7 +185,7 @@ export function MainNav({
         {showMobileMenu && (
           <MobileNav neighbourhood={neighbourhood} user={user}></MobileNav>
         )}
-        <div className="ml-auto flex hidden items-center  w-full space-x-2 sm:justify-end md:flex">
+        <div className="ml-auto flex hidden items-center  w-full space-x-2 md:justify-end md:flex">
           <h1 className="text-2xl font-bold text-sims">
             {neighbourhood ? neighbourhood?.name : "Neighbourhoods"}
           </h1>

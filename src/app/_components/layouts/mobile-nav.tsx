@@ -71,6 +71,14 @@ export function MobileNav({
                 Create Pets
               </Link>
               <Link
+                href={`/dashboard/${neighbourhood.id}`}
+                className={cn(
+                  "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",
+                )}
+              >
+                Dashboards
+              </Link>
+              <Link
                 href={`/neighbourhood/${neighbourhood.id}`}
                 className={cn(
                   "flex w-full items-center rounded-md p-2 text-sm font-medium hover:underline",

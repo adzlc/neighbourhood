@@ -58,7 +58,7 @@ export function DataTableRowActions<TData>({
         </DropdownMenuContent>
       </DropdownMenu>
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="md:max-w-md">
           <DialogHeader>
             <DialogTitle>Delete {pet.name}</DialogTitle>
             <DialogDescription>
@@ -67,7 +67,7 @@ export function DataTableRowActions<TData>({
             </DialogDescription>
           </DialogHeader>
 
-          <DialogFooter className="sm:justify-start">
+          <DialogFooter className="md:justify-start">
             <div className="grid gap-4 py-4">
               <div className="items-start">
                 <Input

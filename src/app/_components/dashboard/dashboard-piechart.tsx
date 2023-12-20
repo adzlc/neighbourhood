@@ -45,8 +45,8 @@ const DashboardPieChart = ({
 
   return (
     <>
-      <ResponsiveContainer width="100%" height="100%">
-        <PieChart width={730} height={250}>
+      <ResponsiveContainer width="90%" height={300} className="overflow-auto">
+        <PieChart>
           <Pie
             data={data}
             dataKey="value"

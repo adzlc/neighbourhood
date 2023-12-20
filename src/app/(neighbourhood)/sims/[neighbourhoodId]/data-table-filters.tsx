@@ -18,7 +18,7 @@ export function DataTableFilters<TData>({
 }) {
   return (
     <>
-      <div className="flex items-center py-2 sm:py-4 flex-wrap">
+      <div className="flex items-center py-2 md:py-4 flex-wrap">
         <Input
           placeholder="Lastname..."
           value={
@@ -27,7 +27,7 @@ export function DataTableFilters<TData>({
           onChange={(event) =>
             table.getColumn("lastName")?.setFilterValue(event.target.value)
           }
-          className="ml-1 h-8 w-24 sm:w-40"
+          className="ml-1 h-8 w-24 md:w-40"
         />
         <Input
           placeholder="Firstname..."
@@ -37,7 +37,7 @@ export function DataTableFilters<TData>({
           onChange={(event) =>
             table.getColumn("firstName")?.setFilterValue(event.target.value)
           }
-          className="mt-1 ml-1 h-8 w-24 sm:w-40"
+          className="mt-1 ml-1 h-8 w-24 md:w-40"
         />
         {!isMobile && (
           <>
@@ -51,7 +51,7 @@ export function DataTableFilters<TData>({
                 (table.getColumn("lifestage")?.getFilterValue() as string) ?? ""
               }
             >
-              <SelectTrigger className="mt-1 ml-1 h-8 w-24 sm:w-40">
+              <SelectTrigger className="mt-1 ml-1 h-8 w-24 md:w-40">
                 <SelectValue placeholder="Filter age..." />
               </SelectTrigger>
               <SelectContent>
@@ -76,7 +76,7 @@ export function DataTableFilters<TData>({
                 ""
               }
             >
-              <SelectTrigger className="mt-1 ml-1 h-8 w-24 sm:w-40">
+              <SelectTrigger className="mt-1 ml-1 h-8 w-24 md:w-40">
                 <SelectValue placeholder="Filter aspiration..." />
               </SelectTrigger>
               <SelectContent>
@@ -100,7 +100,7 @@ export function DataTableFilters<TData>({
           }
           value={(table.getColumn("gender")?.getFilterValue() as string) ?? ""}
         >
-          <SelectTrigger className="mt-1 ml-1 h-8 w-24 sm:w-40">
+          <SelectTrigger className="mt-1 ml-1 h-8 w-24 md:w-40">
             <SelectValue placeholder="Filter gender..." />
           </SelectTrigger>
           <SelectContent>
@@ -130,7 +130,7 @@ export function DataTableFilters<TData>({
                 : "false") ?? "false"
           }
         >
-          <SelectTrigger className="mt-1 ml-1 h-8 w-24 sm:w-40">
+          <SelectTrigger className="mt-1 ml-1 h-8 w-24 md:w-40">
             <SelectValue placeholder="Filter is alive..." />
           </SelectTrigger>
           <SelectContent>

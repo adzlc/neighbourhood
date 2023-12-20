@@ -20,7 +20,7 @@ export function UserAuthForm({
   const [isAuthLoading, setisAuthLoading] = useState<boolean>(false);
   return (
     <>
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-1 md:gap-8">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-1 md:gap-8">
         <Card>
           <CardHeader className="container flex flex-col items-center justify-center ">
             <CardTitle className="mb-4">Login</CardTitle>
