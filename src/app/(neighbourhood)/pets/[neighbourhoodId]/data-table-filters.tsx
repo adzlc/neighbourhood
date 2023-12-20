@@ -12,14 +12,14 @@ import { genders } from "~/data/sim-typings";
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (
     <>
-      <div className="flex items-center py-4">
+      <div className="w-full flex items-center py-4 relative ">
         <Input
-          placeholder="Filter names..."
+          placeholder="Name..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="ml-20 w-40"
+          className="h-8 sm:w-40 w-24"
         />
         <Select
           onValueChange={(value) =>
@@ -29,8 +29,8 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
           }
           value={(table.getColumn("gender")?.getFilterValue() as string) ?? ""}
         >
-          <SelectTrigger className="ml-1 w-40">
-            <SelectValue placeholder="Filter gender..." />
+          <SelectTrigger className="h-8 sm:w-40 w-24">
+            <SelectValue placeholder="Gender..." />
           </SelectTrigger>
           <SelectContent>
             <SelectItem key="All" value="All">
@@ -59,8 +59,8 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
                 : "false") ?? "false"
           }
         >
-          <SelectTrigger className="ml-1 w-40">
-            <SelectValue placeholder="Filter is alive..." />
+          <SelectTrigger className="h-8 sm:w-40 w-24">
+            <SelectValue placeholder="Is alive..." />
           </SelectTrigger>
           <SelectContent>
             <SelectItem key="All" value="All">

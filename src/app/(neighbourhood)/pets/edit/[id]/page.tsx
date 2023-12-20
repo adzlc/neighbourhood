@@ -9,7 +9,7 @@ interface PageProps {
   };
 }
 
-const SimsPage = async ({ params }: PageProps) => {
+const PetsPage = async ({ params }: PageProps) => {
   const petId = params.id;
   const pet = await get(petId);
   async function editPet(data: PetFormValues) {
@@ -20,7 +20,6 @@ const SimsPage = async ({ params }: PageProps) => {
     return;
   }
   const sims = await list(pet?.neighbourhoodId);
-
   return (
     <>
       {pet && (
@@ -35,4 +34,4 @@ const SimsPage = async ({ params }: PageProps) => {
   );
 };
 
-export default SimsPage;
+export default PetsPage;

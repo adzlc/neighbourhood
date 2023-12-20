@@ -25,7 +25,7 @@ export default async function CreateNeighbourhood() {
           ))}
         </Suspense>
       </div>
-      <div className="w-full max-w-xs">
+      <div className="w-full h-full max-w-xs">
         <NeighbourhoodForm submitAction={create} />
       </div>
     </>

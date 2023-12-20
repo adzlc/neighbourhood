@@ -34,7 +34,7 @@ interface DataTableProps<TData, TValue> {
   killSim: (id: string, kill: boolean) => void;
 }
 
-export function DataTable<TData, TValue>({
+export function MobileDataTable<TData, TValue>({
   columns,
   data,
   deleteSim,
@@ -60,7 +60,6 @@ export function DataTable<TData, TValue>({
     initialState: {
       columnVisibility: {
         'gender': false,
-        'isDead': false,
       }
     },    
     meta: {
@@ -79,9 +78,11 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  console.log("Making tabke", data);
+
   return (
     <div className="">
-      <DataTableFilters table={table}/>
+      {/* <DataTableFilters table={table}/> */}
       <div className="rounded-md border">
         <Table>
           <TableHeader>

@@ -81,7 +81,7 @@ const SimsForm = ({
         <form onSubmit={form.handleSubmit(onSubmit)} className="">
           {data?.id && <input type="hidden" name="id" value={data?.id} />}
           <input type="hidden" name="neighbourhoodId" value={neighbourhoodId} />
-          <div className="hidden items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-10">
+          <div className="items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-10">
             <div className="col-span-2 grid items-start gap-6 lg:col-span-2">
               <DemoContainer>
                 <SimsBirthForm />

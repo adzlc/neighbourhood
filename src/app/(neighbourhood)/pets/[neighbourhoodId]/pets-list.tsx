@@ -2,6 +2,8 @@ import { DataTable } from "./data-table";
 import { columns } from "./columns";
 import { revalidatePath } from "next/cache";
 import { deletePet, killPet, list } from "~/server/actions/pets";
+import { MobileDataTable } from "./mobile-data-table";
+import { mobileColumns } from "./mobile-columns";
 
 const PetsList = async ({ neighbourhoodId }: { neighbourhoodId: string }) => {
   const data = await list(neighbourhoodId);
@@ -20,13 +22,23 @@ const PetsList = async ({ neighbourhoodId }: { neighbourhoodId: string }) => {
   return (
     <>
       {data && (
-        <div className="mb-6">
-          <DataTable
-            columns={columns}
-            data={data}
-            deleteSim={deletePetAction}
-            killSim={killSimAction}
-          />
+        <div>
+          {/* <div className="mb-6 hidden sm:block">
+            <DataTable
+              columns={columns}
+              data={data}
+              deleteSim={deletePetAction}
+              killSim={killSimAction}
+            />
+          </div> */}
+          <div className="mb-6">
+            <MobileDataTable
+              columns={mobileColumns}
+              data={data}
+              deleteSim={deletePetAction}
+              killSim={killSimAction}
+            />
+          </div>
         </div>
       )}
     </>

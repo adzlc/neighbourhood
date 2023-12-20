@@ -50,10 +50,10 @@ const NeighbourhoodForm = ({
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex grid w-full grid-cols-1 justify-center"
+          className="flex grid w-full h-full grid-cols-1 justify-center"
         >
           <input type="hidden" name="id" value={data?.id} />
-          <div className="hidden items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-1">
+          <div className=" items-start justify-center gap-6 rounded-lg md:grid lg:grid-cols-2 xl:grid-cols-1">
             <div className="col-span-2 grid items-start gap-6 lg:col-span-1">
               <Card>
                 <CardHeader>

@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "@/components/user-avatar";
 
-interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<User, "name" | "image" | "email">
 }
 
@@ -25,7 +25,7 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         />
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <div className="flex items-center justify-start gap-2 p-2">
+        <div className="flex items-center end-start gap-2 p-2">
           <div className="flex flex-col space-y-1 leading-none">
             {user.name && <p className="font-medium">{user.name}</p>}
             {user.email && (
