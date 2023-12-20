@@ -1,5 +1,5 @@
 "use client";
-import { type Column, type ColumnDef } from "@tanstack/react-table";
+import { FilterFn, type Column, type ColumnDef } from "@tanstack/react-table";
 import { DataTableRowActions } from "./data-table-actions";
 import { Button } from "@/components/ui/button";
 import { ArrowUpDown } from "lucide-react";
@@ -15,6 +15,14 @@ const sortFunction = (name: string, column: Column<PetWithOwner>) => {
       <ArrowUpDown className="ml-2 h-4 w-4" />
     </Button>
   );
+};
+const isDeadFilterFn : FilterFn<PetWithOwner> = (row, columnId, value) => {
+  // Automatically show all values if filter is unset.
+  if (value === undefined || value === null || (typeof value === 'string' && value.length === 0)) {
+    return true;
+  } else {
+    return row.original.isDead == value;
+  }
 };
 
 export const mobileColumns: ColumnDef<PetWithOwner>[] = [
@@ -34,6 +42,11 @@ export const mobileColumns: ColumnDef<PetWithOwner>[] = [
     accessorKey: "gender",
     header: ({ column }) => sortFunction('Gender', column),
     filterFn: "equals"
-  }
+  },
+  {
+    accessorKey: "isDead",
+    header: ({ column }) => sortFunction('Is dead', column),
+    filterFn: isDeadFilterFn
+  },    
 
 ];

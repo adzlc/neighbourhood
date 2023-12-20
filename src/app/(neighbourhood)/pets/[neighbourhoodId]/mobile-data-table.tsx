@@ -60,6 +60,7 @@ export function MobileDataTable<TData, TValue>({
     initialState: {
       columnVisibility: {
         'gender': false,
+        'isDead': false,
       }
     },    
     meta: {
@@ -78,11 +79,9 @@ export function MobileDataTable<TData, TValue>({
     },
   });
 
-  console.log("Making tabke", data);
-
   return (
     <div className="">
-      {/* <DataTableFilters table={table}/> */}
+      <DataTableFilters table={table}/>
       <div className="rounded-md border">
         <Table>
           <TableHeader>

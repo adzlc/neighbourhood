@@ -23,14 +23,14 @@ const PetsList = async ({ neighbourhoodId }: { neighbourhoodId: string }) => {
     <>
       {data && (
         <div>
-          {/* <div className="mb-6 hidden sm:block">
+          <div className="mb-6 hidden sm:block">
             <DataTable
               columns={columns}
               data={data}
               deleteSim={deletePetAction}
               killSim={killSimAction}
             />
-          </div> */}
+          </div>
           <div className="mb-6">
             <MobileDataTable
               columns={mobileColumns}

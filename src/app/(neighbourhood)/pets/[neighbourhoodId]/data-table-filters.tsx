@@ -19,7 +19,7 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="h-8 sm:w-40 w-24"
+          className="h-8 sm:w-40 w-32"
         />
         <Select
           onValueChange={(value) =>
@@ -29,7 +29,7 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
           }
           value={(table.getColumn("gender")?.getFilterValue() as string) ?? ""}
         >
-          <SelectTrigger className="h-8 sm:w-40 w-24">
+          <SelectTrigger className="h-8 sm:w-40 w-24 ml-1">
             <SelectValue placeholder="Gender..." />
           </SelectTrigger>
           <SelectContent>
@@ -59,7 +59,7 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
                 : "false") ?? "false"
           }
         >
-          <SelectTrigger className="h-8 sm:w-40 w-24">
+          <SelectTrigger className="h-8 sm:w-40 w-24 ml-1">
             <SelectValue placeholder="Is alive..." />
           </SelectTrigger>
           <SelectContent>
