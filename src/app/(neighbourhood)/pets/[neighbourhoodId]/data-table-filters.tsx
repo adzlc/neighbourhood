@@ -12,7 +12,7 @@ import { genders } from "~/data/sim-typings";
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (
     <>
-      <div className="w-full flex items-center py-4 relative ">
+      <div className="w-full flex items-center py-2 sm:py-4 relative ">
         <Input
           placeholder="Name..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}

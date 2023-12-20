@@ -18,7 +18,7 @@ export function DataTableFilters<TData>({
 }) {
   return (
     <>
-      <div className="flex items-center py-4 flex-wrap">
+      <div className="flex items-center py-2 sm:py-4 flex-wrap">
         <Input
           placeholder="Lastname..."
           value={
