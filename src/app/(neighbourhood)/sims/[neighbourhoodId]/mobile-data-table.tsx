@@ -33,7 +33,7 @@ interface DataTableProps<TData, TValue> {
   killSim: (id: string, kill: boolean, reason: string | undefined) => void;
 }
 
-export function DataTable<TData, TValue>({
+export function MobileDataTable<TData, TValue>({
   columns,
   data,
   deleteSim,
@@ -81,7 +81,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <div>
-      <DataTableFilters table={table} isMobile={false}/>
+      <DataTableFilters table={table} isMobile={true}/>
       <div className="rounded-md border">
         <Table>
           <TableHeader>
@@ -89,7 +89,7 @@ export function DataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id}>
+                    <TableHead key={header.id} className="h-20 px-1 w-1">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -110,10 +110,10 @@ export function DataTable<TData, TValue>({
                   data-state={row.getIsSelected() && "selected"}
                   // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                   style={table.options.meta?.getRowStyles(row)}
-                  className="h-4 max-h-1"
+                  className="h-4 max-h-1 w-full"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell className="p-3" key={cell.id}>
+                    <TableCell className="py-3 w-1" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

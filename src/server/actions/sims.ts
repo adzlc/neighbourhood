@@ -104,7 +104,6 @@ function getOrientationFilter(sim: Sim | null | undefined) {
   if (sim?.orientation == null) {
     return null;
   }
-  console.log("Making orientation filter ", sim.orientation, sim.gender);
   if ("Straight" === sim.orientation) {
     return {
       gender:
@@ -240,7 +239,6 @@ export async function createSim(neighbourhoodId: string, sim: Sim, parentIds: Co
       sim.neighbourhoodId = neighbourhoodId;
       sim.createdById = session?.user?.id;
 
-      console.log("Sim being created", sim);
       const response = await db.sim.create({
         data: {
           ...sim,
@@ -272,7 +270,6 @@ export async function edit(id: string, data: SimFormValues) {
 
 async function editSim(id: string, sim: Sim, parentIds: ConnectType[]) {
   try {
-    console.log("Sim being updated", sim);
     const session = await getServerAuthSession();
     if (session) {
       const response = await db.sim.update({

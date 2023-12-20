@@ -55,7 +55,6 @@ export async function createNeighbourhood(neighbourhood: Neighbourhood) {
     return;
   }
   try {
-    console.log("Neighbourhood being created", neighbourhood);
     neighbourhood.createdById = session.user.id;
     const response = await db.neighbourhood.create({
       data: neighbourhood,
@@ -80,7 +79,6 @@ export async function updateNeighbourhood(
 ) {
   const session = await getServerAuthSession();
   try {
-    console.log("Neighbour being updated", neighbourhood);
     const response = await db.neighbourhood.update({
       where: {
         id: id,

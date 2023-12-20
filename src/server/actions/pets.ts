@@ -45,7 +45,6 @@ async function createPet(neighbourhoodId: string, pet: Pet) {
     if (session) {
       pet.neighbourhoodId = neighbourhoodId;
       pet.createdById = session?.user?.id;
-      console.log("Pet being created", pet);
       const response = await db.pet.create({
         data: pet,
       });
@@ -57,7 +56,6 @@ async function createPet(neighbourhoodId: string, pet: Pet) {
 }
 
 export async function create(neighbourhoodId: string, data: PetFormValues) {
-  console.log("Creating pet ", data);
   const response = await createPet(neighbourhoodId, data as Pet);
   revalidatePath(`/pets/${neighbourhoodId}`);
   return response;
@@ -71,7 +69,6 @@ export async function edit(id: string, data: PetFormValues) {
 async function editPet(id: string, pet: Pet) {
   try {
     const session = await getServerAuthSession();
-    console.log("Pet being updated", pet);
     const response = await db.pet.update({
       where: {
         id: id,

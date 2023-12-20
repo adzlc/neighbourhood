@@ -4,7 +4,6 @@ import type { Sim } from "~/data/sim-typings";
 import { batchCreate } from "./sims";
 
 export async function importCsv(neighbourhoodId: string, csvFile: string) {
-  console.log("CSV", csvFile);
 
   const headers = [
     "gender",
@@ -36,7 +35,6 @@ export async function importCsv(neighbourhoodId: string, csvFile: string) {
       if (error) {
         console.error(error);
       }
-      console.log("Result", result);
        batchCreate(neighbourhoodId, result).catch((e) => {
         console.error(e);
        });

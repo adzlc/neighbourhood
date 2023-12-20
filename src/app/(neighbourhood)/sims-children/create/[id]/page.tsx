@@ -14,7 +14,6 @@ const SimsPage = async ({ params }: PageProps) => {
   
   async function createChildSimAction(data: SimChildFormValues) {
     "use server";
-    console.log("hello", simId, data)
     await createChildSim(simId, data);
   }
   const parents = await listParents(sim?.neighbourhoodId, simId)

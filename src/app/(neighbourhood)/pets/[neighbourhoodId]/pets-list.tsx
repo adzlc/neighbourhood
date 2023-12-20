@@ -31,7 +31,7 @@ const PetsList = async ({ neighbourhoodId }: { neighbourhoodId: string }) => {
               killSim={killSimAction}
             />
           </div>
-          <div className="mb-6">
+          <div className="mb-6 sm:hidden">
             <MobileDataTable
               columns={mobileColumns}
               data={data}
