@@ -197,10 +197,10 @@ export async function batchCreate(neighbourhoodId: string, sims: Sim[]) {
       let count = 0;
       for (const sim of sims) {
         // Skip header row.
-        if (count == 0) {
+        count++;
+        if (count <=1) {
           continue;
         }
-        count++;
         sim.neighbourhoodId = neighbourhoodId;
         sim.createdById = session?.user?.id;
         if (sim.race == undefined) {
@@ -210,6 +210,8 @@ export async function batchCreate(neighbourhoodId: string, sims: Sim[]) {
           data: sim,
         });
       }
+    } else {
+      console.log("Cannot create, no session")
     }
   } catch (e) {
     console.log(e);
