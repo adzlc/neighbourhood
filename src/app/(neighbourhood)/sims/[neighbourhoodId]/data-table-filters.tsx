@@ -8,6 +8,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { aspirations, genders, lifeStages } from "~/data/sim-typings";
+import { DataTableViewOptions } from "./mobile-column-options";
 
 export function DataTableFilters<TData>({
   table,
@@ -18,7 +19,7 @@ export function DataTableFilters<TData>({
 }) {
   return (
     <>
-      <div className="flex items-center py-2 md:py-4 flex-wrap">
+      <div className="relative w-80 md:w-full grid items-center py-2 md:py-4 grid-cols-3 md:flex">
         <Input
           placeholder="Lastname..."
           value={
@@ -145,6 +146,7 @@ export function DataTableFilters<TData>({
             </SelectItem>
           </SelectContent>
         </Select>
+        <DataTableViewOptions table={table} />
       </div>
     </>
   );

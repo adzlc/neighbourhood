@@ -60,6 +60,8 @@ export function MobileDataTable<TData, TValue>({
       columnVisibility: {
         'gender': false,
         'isDead': false,
+        'owner': false,
+        'career': false,
       }
     },    
     meta: {
@@ -111,7 +113,7 @@ export function MobileDataTable<TData, TValue>({
                   style={table.options.meta?.getRowStyles(row)}
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell key={cell.id} className="break-words">
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),

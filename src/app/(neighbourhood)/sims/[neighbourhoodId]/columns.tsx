@@ -33,11 +33,11 @@ export const columns: ColumnDef<Sim>[] = [
   },
   {
     accessorKey: "lastName",
-    header: ({ column }) => sortFunction('Last Name', column),
+    header: ({ column }) => sortFunction('Lastname', column),
   },
   {
     accessorKey: "firstName",
-    header: ({ column }) => sortFunction('First Name', column),
+    header: ({ column }) => sortFunction('Firstname', column),
   },
   {
     accessorKey: "gender",

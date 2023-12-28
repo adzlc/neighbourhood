@@ -5,7 +5,6 @@ import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
-  getPaginationRowModel,
   useReactTable,
   type SortingState,
   getSortedRowModel,
@@ -21,7 +20,6 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
-import { Button } from "~/app/_components/ui/button";
 import { type CSSProperties, useState } from "react";
 import { DataTableFilters } from "./data-table-filters";
 import { type Sim } from "~/data/sim-typings";
@@ -55,6 +53,14 @@ export function MobileDataTable<TData, TValue>({
       columnVisibility: {
         'gender': false,
         'isDead': false,
+        'race': false,
+        'aspiration': false,
+        'career': false,
+        'hobby': false,
+        'zodiac': false,
+        'orientation': false,
+        'hairColour': false,
+        'eyeColour': false,
       }
     },
     state: {
@@ -88,7 +94,7 @@ export function MobileDataTable<TData, TValue>({
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
                   return (
-                    <TableHead key={header.id} className="h-20 px-1 w-1">
+                    <TableHead key={header.id} className="h-20 px-1 w-1 break-words  text-wrap">
                       {header.isPlaceholder
                         ? null
                         : flexRender(
@@ -112,7 +118,7 @@ export function MobileDataTable<TData, TValue>({
                   className="h-4 max-h-1 w-full"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell className="py-3 w-1" key={cell.id}>
+                    <TableCell className="py-3 w-1 break-words text-wrap" key={cell.id}>
                       {flexRender(
                         cell.column.columnDef.cell,
                         cell.getContext(),
@@ -125,7 +131,7 @@ export function MobileDataTable<TData, TValue>({
               <TableRow>
                 <TableCell
                   colSpan={columns.length}
-                  className="h-24 text-center"
+                  className="h-24 text-center break-words text-wrap"
                 >
                   No results.
                 </TableCell>

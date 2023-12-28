@@ -43,11 +43,11 @@ export const mobileColumns: ColumnDef<Sim>[] = [
   },
   {
     accessorKey: "lastName",
-    header: ({ column }) => sortFunction("Last Name", column),
+    header: ({ column }) => sortFunction("Lastname", column),
   },
   {
     accessorKey: "firstName",
-    header: ({ column }) => sortFunction("First Name", column),
+    header: ({ column }) => sortFunction("Firstname", column),
   },
   {
     accessorKey: "gender",
@@ -61,6 +61,38 @@ export const mobileColumns: ColumnDef<Sim>[] = [
   },
   {
     accessorKey: "lifestage",
-    header: ({ column }) => sortFunction("Age", column),
+    header: ({ column }) => sortFunction("Lifestage", column),
   },
+  {
+    accessorKey: "race",
+    header: ({ column }) => sortFunction('Race', column),
+  },
+  {
+    accessorKey: "aspiration",
+    header:  ({ column }) => sortFunction('Aspiration', column),
+  },
+  {
+    accessorKey: "career",
+    header:  ({ column }) => sortFunction('Career', column),
+  },
+  {
+    accessorKey: "hobby",
+    header:  ({ column }) => sortFunction('Hobby', column),
+  },
+  {
+    accessorKey: "zodiac",
+    header:  ({ column }) => sortFunction('Zodiac', column),
+  },
+  {
+    accessorKey: "orientation",
+    header: ({ column }) => sortFunction('Orientation', column),
+  },
+  {
+    accessorKey: "hairColour",
+    header:  ({ column }) => sortFunction('Hair Colour', column),
+  },
+  {
+    accessorKey: "eyeColour",
+    header:  ({ column }) => sortFunction('Eye Colour', column),
+  },  
 ];

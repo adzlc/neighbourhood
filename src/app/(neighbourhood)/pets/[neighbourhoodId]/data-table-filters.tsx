@@ -8,18 +8,19 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { genders } from "~/data/sim-typings";
+import { DataTableViewOptions } from "./mobile-column-options";
 
 export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
   return (
     <>
-      <div className="w-full flex items-center py-2 md:py-4 relative ">
+      <div className="relative flex w-full items-center py-2 md:py-4 ">
         <Input
           placeholder="Name..."
           value={(table.getColumn("name")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
             table.getColumn("name")?.setFilterValue(event.target.value)
           }
-          className="h-8 md:w-40 w-32"
+          className="h-8 w-32 md:w-40"
         />
         <Select
           onValueChange={(value) =>
@@ -29,7 +30,7 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
           }
           value={(table.getColumn("gender")?.getFilterValue() as string) ?? ""}
         >
-          <SelectTrigger className="h-8 md:w-40 w-24 ml-1">
+          <SelectTrigger className="ml-1 h-8 w-24 md:w-40">
             <SelectValue placeholder="Gender..." />
           </SelectTrigger>
           <SelectContent>
@@ -37,10 +38,10 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
               All
             </SelectItem>
             {genders?.map((gender) => (
-                      <SelectItem key={gender} value={gender}>
-                        {gender}
-                      </SelectItem>
-                    ))}
+              <SelectItem key={gender} value={gender}>
+                {gender}
+              </SelectItem>
+            ))}
           </SelectContent>
         </Select>
         <Select
@@ -59,7 +60,7 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
                 : "false") ?? "false"
           }
         >
-          <SelectTrigger className="h-8 md:w-40 w-24 ml-1">
+          <SelectTrigger className="ml-1 h-8 w-24 md:w-40">
             <SelectValue placeholder="Is alive..." />
           </SelectTrigger>
           <SelectContent>
@@ -74,6 +75,9 @@ export function DataTableFilters<TData>({ table }: { table: Table<TData> }) {
             </SelectItem>
           </SelectContent>
         </Select>
+      </div>
+      <div className="relative flex w-full items-center py-2 md:py-4 ">
+        <DataTableViewOptions table={table} />
       </div>
     </>
   );
