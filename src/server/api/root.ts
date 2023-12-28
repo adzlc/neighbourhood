@@ -1,5 +1,6 @@
 import { createTRPCRouter } from "~/server/api/trpc";
 import { neighbourhoodRouter } from "./routers/neighbourhood";
+import { simsRouter } from "./routers/sims";
 
 /**
  * This is the primary router for your server.
@@ -8,6 +9,7 @@ import { neighbourhoodRouter } from "./routers/neighbourhood";
  */
 export const appRouter = createTRPCRouter({
   neighbourhood: neighbourhoodRouter,
+  sims: simsRouter
 });
 
 // export type definition of API

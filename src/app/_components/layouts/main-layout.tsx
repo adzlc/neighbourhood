@@ -19,8 +19,8 @@ export default async function MainLayout({
     email: session?.user.email,
   };
   return (
-    <div className="flex-col md:flex">
-      <div className="border-b">
+    <div className="flex-col md:flex relative">
+      <div className="border-b sticky top-0 z-50 w-full bg-white">
         <div className="flex h-12 items-center px-4 md:h-24">
           <div className="ml-auto flex w-full space-x-2 md:justify-start">
             <MainNav
